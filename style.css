@@ -432,7 +432,7 @@ input[type=email] {
 input[type=email]:focus {
 	outline:1;
 }
-#enlist button {
+#mc_embed_signup .button {
 	display: block;
 	margin: 0 auto;
 	background-image: none;
@@ -458,7 +458,7 @@ input[type=email]:focus {
     -o-transition: padding 0.25s;
     transition: padding 0.25s;
 }
-#enlist button:hover {
+#mc_embed_signup .button:hover {
 	color: #111;
 	background-color: #d2d0cb;
 	padding-left: 60px;
@@ -468,6 +468,36 @@ input[type=email]:focus {
 .thumbvid {
 	margin: 20px 40px;
 }
+
+#gameplay {
+	height: 164px;
+	width: 460px;
+	border: 1px solid #dbbd68;
+	cursor: pointer;
+	background-image: url("img/dowTrailerShort.gif");
+	margin: 20px 20px;
+}
+
+.button i{
+    font-size: 1.375em;
+    position: absolute;
+    right: 1.5em;
+    height: 2.5em;
+    width: 2.5em;
+    border-radius: 50%;
+    top: 2.5em;
+    text-align: center;
+    color: #000;
+    background-color: #dbbd68;
+    transition: color .5s ease-in-out;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+
 
 
 /*******************************/

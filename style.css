@@ -61,8 +61,12 @@ html, body {
 #bgvideo {
 	height:100%;
 }
-a {
+a, #btnGames label {
 	color: #d2d0cb;
+	text-decoration: underline;
+	cursor: pointer;
+}
+#nav a, #btnGames label {
 	text-decoration: none;
 }
 p, h1, h2, h3 {
@@ -97,6 +101,8 @@ header {
 	margin-left: 40px;
 	margin-top: 5px;
 }
+input[type=checkbox]{display: none;}
+.hamburger {display: none;}
 #nav {
 	height: 75px;
 	float: right;
@@ -113,13 +119,25 @@ header {
 #nav > li:last-child {
 	border-right: 1px solid #2f2f2f;
 }
-#nav > li > a {
+#nav > li > a, #btnGames label {
 	display: block;
 	padding: 29.5px 20px;
 }
-#nav > li a:hover {
+#nav > li a:hover, #btnGames label:hover {
 	background-color: rgba(10,10,10,.9);
 	color:#fff;
+}
+#btnGames label {
+	background-image: url('img/arrowDN.png');
+	background-size: 8px;
+	background-position: bottom 5px center;
+	background-repeat: no-repeat;
+}
+#btnGames label:hover {
+	background-image: url('img/arrowDN_active.png');
+	background-size: 8px;
+	background-position: bottom 5px center;
+	background-repeat: no-repeat;
 }
 #btnJoin a {
 	background-color: #e9ce16;
@@ -159,8 +177,12 @@ li#btnGames:hover > a {
 	background-color: rgba(10,10,10,.9);
 	color:#fff;
 }
-li#btnGames:hover > .dropdown {
+input[type=checkbox]#gamesMenu:checked ~ .dropdown {
 	display: block;
+}
+input[type=checkbox]#gamesMenu:checked ~ label {
+	color: white;
+	background-image:url('img/arrowUP_active.png');
 }
 #btnDow {
 	text-indent: 140px;
@@ -287,6 +309,7 @@ footer .logo {
 	background-position: 0 -21px;
 }
 #dowEnlist {
+	text-decoration: none;
 	width: 194px;
 	height: 18px;
 	background-size: 153px;
@@ -325,7 +348,12 @@ footer .logo {
 	width: 600px;
 	margin: auto;
 }
-
+#kickstarter {
+	padding: 0 25%;
+}
+#kickstarter img {
+	width: 50%;
+}
 /*******************************/
 /************* DOW *************/
 /*******************************/
@@ -368,12 +396,12 @@ footer .logo {
 	#axisSoldier {
 		position: absolute;
 		bottom: 0;
-		right: -50%;
+		right: -65%;
 	}
 	#alliedSoldier {
 		position: absolute;
 		bottom: 0;
-		left: -50%;
+		left: -65%;
 	}
 }
 #content.dow, #content.about {
@@ -530,4 +558,176 @@ input[type=email]:focus {
 @-o-keyframes fadein {
     from { opacity: 0; }
     to   { opacity: 1; }
+}
+
+
+@media screen and (max-width: 999px) {
+	#content {
+		height: auto;
+	}
+	.wrapper {
+		width: 100%;
+	}
+	.narrower {
+		width: 80%;
+	}
+	.menuWrap ul {
+		padding: 0;
+		-webkit-transform-style:preserve-3d;
+		transform-style:preserve-3d;
+	}
+	.menuWrap #nav li {
+		position: relative;
+		display: inline;
+		margin:0;
+		border:none;
+	}
+	.menuWrap #nav li a, #btnGames label {
+		background-color: rgba(10,10,10,0.9);
+		margin-bottom: 1px;
+	}
+	.menuWrap #nav #btnJoin a {
+		background-color: #e9ce16;
+		color:#111111;
+	}
+	.dropdown {
+		position: relative;
+	}
+	.dropdown a {
+		padding: 29.5px 20px;
+		background-color: #d2d0cb !important;
+		color: rgb(17,17,17);
+	}
+	#btnDow {
+		padding-top: 60px;
+		text-indent: 0;
+		background-position: center top 20px;
+	}
+	
+	.menuWrap #nav {
+		opacity: 0;
+		height: auto;
+		z-index: 3;
+		margin: 76px 0 0 0;
+		width: 100%;
+		position: absolute;
+		text-align: center;
+		pointer-events:none;
+		-webkit-transform:translateY(-10px);
+		transform:translateY(-10px);
+		-webkit-backface-visibility:hidden;
+		backface-visibility:hidden;
+		-webkit-transiton: 0.25s;
+	    -moz-transition: 0.25s;
+	    -ms-transition: 0.25s;
+	    -o-transition: 0.25s;
+	    transition: 0.25s;
+	}
+	.menuWrap #hamburger {
+		display: inline-block;
+		border:none;
+		width: 45px;
+		height: 45px;
+		text-indent: -900em;
+		overflow: hidden;
+		position: relative;
+		cursor: pointer;
+		outline: none;
+		background-color: rgba(10,10,10,0.9);
+		float: right;
+		margin: 15px 15px 0 0;
+	}
+	.menuWrap #hamburger:after {
+		content: '';
+		position: absolute;
+		width: 68%;
+		height: 5px;
+		background-color: #d2d0cb;
+		top: 10px;
+		left: 16%;
+		box-shadow: 0 10px 0 #d2d0cb, 0 20px 0 #d2d0cb;
+	}
+	input[type=checkbox]#menuBtn:checked ~ #nav {	
+		opacity: 1;
+		pointer-events:auto;
+		-webkit-transform:translateY(0px);
+		transform:translateY(0px);
+	}
+	#bgvideo {
+		display: none;
+	}
+	#content {
+		background: url('img/vidstill.jpg') no-repeat center center;
+		background-size: cover;
+		height: auto;
+		width: 100%;
+	}
+	#content.about {
+		background: none !important;
+	}
+	#content.dow {
+		background:url('img/dow_bg.png') no-repeat center;
+	}
+	#footerNav {
+		display: none;
+	}
+	#gameplay {
+		width: 100%;
+		background:url("img/dowTrailerShort2.gif") no-repeat center center;
+		margin: 20px auto;
+	}
+	input[type=email] {
+		width: 90%;
+		padding: 0 5%;
+	}
+}
+@media screen and (max-width: 500px) {
+	#dowCTA {
+		width: inherit;
+	}
+	#overlay #dowOverlayLogo {
+		width: 80%;
+		padding-left: 10%;
+	}
+	#dowLogo {
+		width: 100%;
+	}
+	#axisSoldier {
+		position: absolute;
+		bottom: 0;
+		right: -95%;
+	}
+	#alliedSoldier {
+		position: absolute;
+		bottom: 0;
+		left: -95%;
+	}
+}
+
+@media screen and (max-width: 450px) {
+	#dowLrn, #btnEnlist {
+		background-image: url('img/dow_overlay_btns_mid.png');
+	}
+	#dowLrn, #dowEnlist {
+		width: 100%;
+		float: none;
+		margin-left: 0;
+	}
+	#dowLrn {
+		background-position: top center;
+		margin-bottom: 20px;
+	}
+	#dowLrn:hover {
+		background-position: center -21px;
+	}
+	#dowEnlist {
+		text-align: center;
+		background-position: center -42px;
+	}
+	#dowEnlist:hover {
+		background-position: center -63px;
+	}
+	#overlay #line {
+		display: none;
+	}
 }

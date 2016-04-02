@@ -525,7 +525,11 @@ input[type=email]:focus {
     vertical-align: baseline;
 }
 
-
+#paypal {
+	padding-left: 140px;
+	padding-top: 20px;
+	color: white;
+}
 
 
 /*******************************/

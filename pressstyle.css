@@ -1,0 +1,129 @@
+#content.press {background-image: none !important;}
+body {
+	background-image: url('img/dow_bg.png');
+}
+.wrapper {
+	overflow: hidden;
+	margin-top: 100px;
+}
+.wrapper #information {
+}
+#pressNav {
+	width: 20%;
+	float: left;
+	margin-bottom: 50px;
+	overflow: hidden;
+}
+#pressNav a {
+	text-transform: uppercase;
+	font-size: 12px;
+	letter-spacing: .1em;
+}
+
+#pressNav li {
+	margin-bottom: 30px;
+}
+#content {
+	overflow: hidden;
+	padding: 0 20px 100px 20px;
+	width: 70%;
+	float: left;
+}
+
+#information p {
+	font-size: 14px;
+	margin-bottom: 20px;
+}
+.download {
+	display: block;
+	width: 80%;
+	margin: auto;
+	background-color: #d2d0cb;
+	text-align: center;
+	font-size: 12px;
+	border-radius: 4px;
+	color:black;
+	padding: 20px 0;
+}
+.download:hover {
+	background-color: white;
+	cursor: pointer;
+}
+.infoBlock {
+	padding-bottom: 10px;
+	margin-bottom: 20px;
+	border-bottom: 1px solid rgba(210, 208, 203, 0.1);
+}
+#factSheet {
+	overflow: hidden;
+	margin-bottom: 20px;
+	border-bottom: 1px solid rgba(210, 208, 203, 0.1);
+}
+#factSheet li {
+	margin-bottom: 20px;
+	margin-right: 50px;
+	float: left;
+}
+#factSheet a {
+}
+#factSheet p {
+	padding-bottom: 5px;
+}
+.factLabel {
+	font-weight: bold;
+	font-size: 12px;
+	line-height: 14px;
+}
+.fact {
+	font-size: 14px;
+}
+h3 {
+	font-size: 18px;
+	font-weight: bold;
+	text-transform: uppercase;
+	margin-bottom: 20px;
+	letter-spacing: .1em;
+}
+.pressImg {
+	max-width: 100%;
+}
+.infoBlock ul {
+	padding: 0 20px;
+}
+.infoBlock ul li {
+	list-style: disc;
+	color: #d2d0cb;
+}
+
+#social {
+	padding-top: 30px;
+}
+#social li {
+	margin-bottom: 0px;
+}
+#social li a {
+	display: block;
+	height: 16px;
+	line-height: 16px;
+	background-repeat: no-repeat;
+	background-position: left;
+	text-decoration: none;
+	border-top: 1px solid rgba(210, 208, 203, 0.1);
+	padding: 5px 0 5px 26px;
+}
+#social li a:hover {
+	background-color: rgba(210, 208, 203, 0.1);
+}
+#twitter a {
+	background-image: url('img/icn_twitter.png');
+}
+#facebook a {
+	background-image: url('img/icn_facebook.png');
+}
+#youtube a {
+	background-image: url('img/icn_youtube.png');
+}
+#discord a {
+	background-image: url('img/icn_discord.png');
+	border-bottom: 1px solid rgba(210, 208, 203, 0.1);
+}

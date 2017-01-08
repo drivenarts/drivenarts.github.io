@@ -531,6 +531,14 @@ input[type=email]:focus {
 	color: white;
 }
 
+#widget {
+	position: relative;
+	display: block;
+	margin: 0 auto;
+	width: 300px;
+	z-index: 3;
+}
+
 
 /*******************************/
 /************ ANIMS ************/

@@ -293,7 +293,7 @@ footer .logo {
 	margin-left: 15px;
 }
 #dowLrn, #dowEnlist {
-	background: url('img/dow_overlay_btns.png') no-repeat top left;
+	background: url('img/dow_overlay_btns2.png') no-repeat top left;
 	display: block;
 	text-indent: -9999px;
 }
@@ -727,7 +727,7 @@ input[type=email]:focus {
 
 @media screen and (max-width: 450px) {
 	#dowLrn, #btnEnlist {
-		background-image: url('img/dow_overlay_btns_mid.png');
+		background-image: url('img/dow_overlay_btns2.png');
 	}
 	#dowLrn, #dowEnlist {
 		width: 100%;

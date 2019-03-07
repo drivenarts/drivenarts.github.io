@@ -233,15 +233,21 @@ footer .logo {
 
 /******VIDEO BACKGROUND******/
 #player {
-	position: fixed;
-	/**padding-bottom: 56.25%;**/
-	height: 100%;
-	width: 100%;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%; 
+  min-height: 100%;
+  height: 100%;
+  width: 100%;
 }
+
 #player iframe {
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
+	min-width: 100%; 
+  	min-height: 100%;
 	width: 100%;
 	height: 100%;
 	z-index: 1;

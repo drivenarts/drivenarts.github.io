@@ -11,11 +11,11 @@
 
       // 2. This function creates an <iframe> (and YouTube player)
       //    after the API code downloads.
-      var player;
+      var bgvideo;
       function onYouTubeIframeAPIReady() {
-        player = new YT.Player('player', {
-          height: '100%',
-          width: '100%',
+        bgvideo = new YT.Player('bgvideo', {
+          height: "100%",
+          width: "100%",
           playerVars: {
                     autoplay: 1,
                     loop: 1,
@@ -38,7 +38,7 @@
       // 3. The API will call this function when the video player is ready.
       function onPlayerReady(event) {
         event.target.playVideo();
-        player.mute();
+        bgvideo.mute();
       }
 
       var done = false;
@@ -46,7 +46,7 @@
         
       }
       function stopVideo() {
-        player.stopVideo();
+        bgvideo.stopVideo();
       }
     </script>
 
@@ -103,7 +103,7 @@
 			<img id="fade" src="img/fade.png" data="overlay"/>
 	</div>
 	<div class=video-container>
-    		<div id=player></div>
+    		<div id=bgvideo></div>
 	</div>
 	<footer id="footer">
 		<a href="index.html" class="logo">DrivenArts</a>

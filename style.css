@@ -60,6 +60,7 @@ html, body {
 }
 #player {
 	height:100%;
+	width:100%;
 }
 a, #btnGames label {
 	color: #d2d0cb;

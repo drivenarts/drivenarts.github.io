@@ -231,11 +231,12 @@ footer .logo {
 }
 
 /******VIDEO BACKGROUND******/
+/**
 #player {
 	position: relative;
 	padding-bottom: 56.25%;
 	height: 0;
-}
+}**/
 #player iframe {
 	position: absolute;
 	top: 0;

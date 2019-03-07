@@ -60,7 +60,7 @@ html, body {
 }
 #player {
 	height:100%;
-	width:100%;
+	width:120%;
 }
 a, #btnGames label {
 	color: #d2d0cb;
@@ -236,13 +236,13 @@ footer .logo {
 	position: absolute;
 	/**padding-bottom: 56.25%;**/
 	height: 100%;
-	width: 100%;
+	width: 120%;
 }
 #player iframe {
 	position: absolute;
 	top: 0;
 	left: 0;
-	width: 100%;
+	width: 120%;
 	height: 100%;
 	z-index: 1;
 }

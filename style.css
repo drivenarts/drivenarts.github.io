@@ -58,7 +58,7 @@ html, body {
 	min-height: 100%;
 	position: relative;
 }
-#bgvideo {
+#player {
 	height:100%;
 }
 a, #btnGames label {

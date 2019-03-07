@@ -59,8 +59,13 @@ html, body {
 	position: relative;
 }
 #player {
-	height:100%;
-	width:100%;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
 }
 a, #btnGames label {
 	color: #d2d0cb;
@@ -233,13 +238,13 @@ footer .logo {
 
 /******VIDEO BACKGROUND******/
 #player {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  min-width: 100%; 
-  min-height: 100%;
-  height: 100%;
-  width: 100%;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
 }
 
 #player iframe {
@@ -248,8 +253,8 @@ footer .logo {
 	left: 0;
 	min-width: 100%; 
   	min-height: 100%;
-	width: 100%;
-	height: 100%;
+	width: auto;
+	height: auto;
 	z-index: 1;
 }
 

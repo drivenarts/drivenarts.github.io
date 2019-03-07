@@ -231,12 +231,12 @@ footer .logo {
 }
 
 /******VIDEO BACKGROUND******/
-#bgvideo {
+#player {
 	position: relative;
 	padding-bottom: 56.25%;
 	height: 0;
 }
-#bgvideo iframe {
+#player iframe {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -674,7 +674,7 @@ input[type=email]:focus {
 		-webkit-transform:translateY(0px);
 		transform:translateY(0px);
 	}
-	#bgvideo {
+	#player {
 		display: none;
 	}
 	#content {

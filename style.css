@@ -232,7 +232,7 @@ footer .logo {
 
 /******VIDEO BACKGROUND******/
 #player {
-	position: relative;
+	position: absolute;
 	/**padding-bottom: 56.25%;**/
 	height: 100%;
 	width: 100%;

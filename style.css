@@ -482,6 +482,13 @@ input[type=email] {
 input[type=email]:focus {
 	outline:1;
 }
+
+
+#mc_embed_signup{
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
 #mc_embed_signup .button {
 	display: block;
 	margin: 0 auto;

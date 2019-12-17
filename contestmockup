@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<!-- saved from url=(0031)https://rs2vietnam.com/contest/ -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://ogp.me/ns/fb#" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+
+
+
+<title>$50,000 Mapping Contest | Days of War</title>
+
+
+
+<meta name="description" content="Enter to win $50,000 WW2 Mapping Contest!">
+
+
+
+<meta name="google-site-verification" content="xj4RmmIgELTEnLT2IcubvAwdZlpw75ExmbYK4FdmNj8">
+
+
+
+<meta name="keywords" content="Days of War,Driven Arts,ww2,steam,ue4,FPS,PC">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="robots" content="index, follow">
+
+<meta name="revisit-after" content="1 days">
+
+<meta name="googlebot" content="code">
+
+<meta name="author" content="Driven Arts">
+
+<meta property="og:type" content="website">
+
+<meta property="og:url" content="https://drivenarts.com/contest" data-doc-meta="true">
+
+<meta property="og:title" content="$50,000 Mapping Contest | Days of War" data-doc-meta="true">
+
+<meta property="og:description" content="Enter to win $50,000 WW2 Mapping Contest!" data-doc-meta="true">
+
+<meta property="og:image" content="https://drivenarts.github.io/img/Stamp-logo-full-size-no-padding.png">
+
+<meta property="og:site_name" content="Driven Arts" data-doc-meta="true">
+
+<meta name="twitter:card" content="summary_large_image">
+
+<meta name="twitter:site" content="$50,000 Mapping Contest | Days of War" data-doc-meta="true">
+
+<meta name="twitter:title" content="$50,000 Mapping Contest | Days of War" data-doc-meta="true">
+
+<meta name="twitter:description" content="Enter to win $50,000 WW2 Mapping Contest!" data-doc-meta="true">
+
+<meta name="twitter:url" content="https://drivenarts.com/contest">
+
+<meta name="twitter:site" content="@playdaysofwar">
+
+<meta name="twitter:creator" content="@playdaysofwar">
+
+<meta name="twitter:image" content="https://drivenarts.github.io/img/Stamp-logo-full-size-no-padding.png">
+
+<meta name="twitter:url" content="https://drivenarts.com/contest">
+
+<meta name="apple-mobile-web-app-title" content="$50,000 Mapping Contest | Days of War">
+
+<link href="https://rs2vietnam.com/contest/images/icons/rs2helmet.ico" rel="icon" type="image/x-icon">
+
+
+
+
+
+<style type="text/css">
+
+::-webkit-scrollbar				{outline:1px;width:20px}
+
+::-webkit-scrollbar-button,::-webkit-scrollbar-corner{background-color:#666}
+
+::-webkit-scrollbar-thumb 		{background-color:rgba(200,200,200,1);border:3px solid #000}
+
+::-webkit-scrollbar-track 		{background-color:#111}
+
+
+
+@font-face 						{font-family:UniveMedExtCon;src:url(../webfonts/UniveMedExtCon.ttf)}
+
+
+
+
+
+a:link,a:visited,a:active		{color:#8f3a33;text-decoration:none}
+
+a:hover 						{color:white;text-decoration:none;}
+
+
+
+html              {background-color: black}
+
+body,input						{color:#e0e0e0;cursor:default;overflow-x:hidden;width:100%;font-size:14px;letter-spacing:1px;font-family: arial}
+
+body             {background-color:#000;height:100%;margin:0px;padding:0px;min-width:100%;background:url(https://drivenarts.github.io/img/vidstill.jpg) no-repeat top center;background-attachment:fixed;background-size:2560px auto;}
+
+
+
+hr 								{background-image:linear-gradient(to right,rgba(0,0,0,0), rgba(255,255,255,0.7), rgba(0,0,0,0));border:0;height:1px;margin-right:5%;margin-left:5%;margin-top:10px;margin-bottom:20px;}
+
+
+
+video 							{position: fixed;top: 50%;left: 50%;width: auto;height: auto;min-width: 100%;min-height: 100%;z-index: -100;transform: translateX(-50%) translateY(-50%);transition: 1s opacity;}
+
+#back-to-top1           {margin-left:auto;margin-right:auto;margin-top:60px;margin-bottom:60px;text-align: center;font-size: 18px;border: 2px solid #999;padding:10px;background-color: #111;width:150px;border-radius: 4px}
+
+#back-to-top1:hover       {background-color: #333;border: 2px solid white}
+
+.footer							{font-family:UniveMedExtCon,"Arial Black", sans-serif;letter-spacing: 3px;padding: 20px;text-align:center;background-color: #000}
+
+.bottom-nav-bar 				{font-size:16px;letter-spacing: 4px;margin-bottom:40px;}
+
+.disclaimer						{font-size: 12px;letter-spacing: 3px;}
+
+.companylogos.amglogo			{background-position:-225px 0;height:160px;width:200px}
+
+.companylogos.steamlogo			{background-position:-425px 0;height:64px;width:200px}
+
+.companylogos.steamlogo-small	{background-position:-263px 0;background-size:454px 99px;height:40px;margin:5px 10px;width:124px}
+
+.companylogos.tripwirelogo		{background-position:0 0;height:64px;width:225px}
+
+.companylogos.unreallogo		{background-position:-625px 0;height:128px;width:107px}
+
+.companylogos					{background:url(http://media.tripwirecdn.com/rs2website/images/footer/companylogosprite.png) no-repeat top left;display:inline-block;margin:40px;vertical-align:middle}
+
+main 							{width: 1260px;margin:auto;padding:0}
+
+p 								{text-align: left}
+
+
+
+b                 {color:white;}
+
+h1,h2,h3,h4				{font-family:UniveMedExtCon,"Arial Black", sans-serif;letter-spacing: 3px;color: white}
+
+h1 								{font-size:55px;text-align: center}
+
+h2 								{font-size:45px;margin-top:20px;margin-bottom:20px;color:#e1ca6a;}
+
+h3 								{font-size:35px;margin-top:10px;margin-bottom:10px;color:#e1ca6a;}
+
+h4 								{font-size:25px;margin-top:10px;margin-bottom:10px;color:#e1ca6a}
+
+ul 								{line-height: 20px}
+
+.green            {color:#e1ca6a;}
+
+
+
+
+
+.socialmedia-icons-container  {display: inline-block;vertical-align: middle;margin-top:10px;}
+
+.social-icon          {border: 2px solid white;border-radius: 24px; margin-left:1px;margin-right:1px;opacity: 0.8;margin-bottom:10px;}
+
+.social-icon:hover        {background-color: white;opacity:1;}
+
+
+
+
+
+#content-container          {background-image:linear-gradient(to right,rgba(5,10,12,0.6),rgba(5,10,12,1.0),rgba(5,10,12,1.0),rgba(5,10,12,1.0),rgba(5,10,12,1.0), rgba(5,10,12,0.6));border: 1px solid #444;padding-left:40px;padding-right:40px;
+
+box-shadow:0 10px 10px 0 rgba(0,0,0,0.8), 0 40px 40px 0 rgba(0,0,0,0.8)}
+
+#logo-intro-container       {padding-top: 50px; padding-bottom: 50px;}
+
+#overview-container 			  {}
+
+#categories-container 			{text-align: center;vertical-align: top;}
+
+#criteria-container         {}
+
+#rules-container            {}
+
+.phase-container 				{display: inline-block;text-align: left;padding:20px;vertical-align: top}
+
+#summary 						{padding:10px;width: 600px;margin:auto;display: block;font-size: 18px;line-height: 28px;color:white;}
+
+#phase-1 						{width:270px;font-size: 18px;padding:20px;line-height: 30px;color: white;border: 1px solid #444;margin:5px;}
+
+#phase-2 						{width:270px;font-size: 18px;padding:20px;line-height: 30px;color: white;border: 1px solid #444;margin:5px;}
+
+#best-map 						{width:290px;text-align: center;padding:20px;margin:5px;}
+
+#best-mod 						{width:290px;text-align: center;padding:20px;margin:5px;}
+
+div#judge-description    {width: 500px;margin:auto;}
+
+img.contest-logo         {margin-top:0px;}
+
+div#criteria                   {margin: auto;width: 250px;font-size: 18px;line-height: 28px;color:#e1ca6a;}
+
+
+
+#mc_embed_signup        {text-align: right;height:80px;font-family:UniveMedExtCon;vertical-align: top}
+
+
+
+
+
+input.button {
+
+  -moz-box-shadow:inset 0px 1px 0px 0px #c1ed9c;
+
+  -webkit-box-shadow:inset 0px 1px 0px 0px #c1ed9c;
+
+  box-shadow:inset 0px 1px 0px 0px #c1ed9c;
+
+  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #9dce2c), color-stop(1, #7fa827) );
+
+  background:-moz-linear-gradient( center top, #9dce2c 5%, #7fa827 100% );
+
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#9dce2c', endColorstr='#7fa827');
+
+  background-color:#9dce2c;
+
+  -webkit-border-top-left-radius:5px;
+
+  -moz-border-radius-topleft:5px;
+
+  border-top-left-radius:5px;
+
+  -webkit-border-top-right-radius:5px;
+
+  -moz-border-radius-topright:5px;
+
+  border-top-right-radius:5px;
+
+  -webkit-border-bottom-right-radius:5px;
+
+  -moz-border-radius-bottomright:5px;
+
+  border-bottom-right-radius:5px;
+
+  -webkit-border-bottom-left-radius:5px;
+
+  -moz-border-radius-bottomleft:5px;
+
+  border-bottom-left-radius:5px;
+
+  border:1px solid #83c41a;
+
+  display:inline-block;
+
+  color:white;
+
+  font-size:20px;
+
+  height:44px;
+
+  width:140px;
+
+  text-decoration:none;
+
+  text-align:center;
+
+  text-shadow:1px 1px 0px #689324;
+
+  z-index: 999;
+
+  cursor: pointer;
+
+  margin-right:80px;
+
+  font-family:UniveMedExtCon
+
+}
+
+input.button:hover {
+
+  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #7fa827), color-stop(1, #9dce2c) );
+
+  background:-moz-linear-gradient( center top, #7fa827 5%, #9dce2c 100% );
+
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#7fa827', endColorstr='#9dce2c');
+
+  background-color:#8cb82b;
+
+}
+
+
+
+a.buttonBIG {
+
+  -moz-box-shadow:inset 0px 1px 0px 0px #c1ed9c;
+
+  -webkit-box-shadow:inset 0px 1px 0px 0px #c1ed9c;
+
+  box-shadow:inset 0px 1px 0px 0px #c1ed9c;
+
+  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #e1ca6a), color-stop(1, #c6aa37) );
+
+  background:-moz-linear-gradient( center top, #e1ca6a 5%, #c6aa37 100% );
+
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e1ca6a', endColorstr='#c6aa37');
+
+  background-color:#e1ca6a;
+
+  -webkit-border-top-left-radius:5px;
+
+  -moz-border-radius-topleft:5px;
+
+  border-top-left-radius:5px;
+
+  -webkit-border-top-right-radius:5px;
+
+  -moz-border-radius-topright:5px;
+
+  border-top-right-radius:5px;
+
+  -webkit-border-bottom-right-radius:5px;
+
+  -moz-border-radius-bottomright:5px;
+
+  border-bottom-right-radius:5px;
+
+  -webkit-border-bottom-left-radius:5px;
+
+  -moz-border-radius-bottomleft:5px;
+
+  border-bottom-left-radius:5px;
+
+  border:1px solid #e1ca6a;
+
+  display:inline-block;
+
+  color:white;
+
+  font-size:30px;
+
+  text-decoration:none;
+
+  text-align:center;
+
+  text-shadow:1px 1px 0px #689324;
+
+  z-index: 999;
+
+  cursor: pointer;
+
+  margin:70px;
+
+  padding:20px;
+
+  vertical-align: middle;
+
+  letter-spacing: 2px;
+
+  font-family:
+
+}
+
+a.buttonBIG:hover {
+
+  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #c6aa37), color-stop(1, #e1ca6a) );
+
+  background:-moz-linear-gradient( center top, #c6aa37 5%, #e1ca6a 100% );
+
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#c6aa37', endColorstr='#e1ca6a');
+
+  background-color:#e1ca6a;
+
+}
+
+#submissionform {text-align: center;}
+
+
+
+
+
+.mc-field-group         {display: inline-block;text-align: left;top:12px;position: relative;}
+
+
+
+
+
+.email              {background:#222;display: inline-block;border: 1px solid #999;font-size: 20px;height:40px;width: 300px;text-indent: 20px;color:white;margin-right:20px;margin-left:20px;font-family:UniveMedExtCon}
+
+.email:hover          {border: 1px solid white;background:#444;}
+
+input.email:active        {color:white;}
+
+
+
+
+
+</style>
+
+<!--
+
+
+
+<script async="" src="./modding contest_files/analytics.js.download"></script><script type="application/ld+json">
+
+            {
+
+                            "@context": "http://schema.org",
+
+                            "@type": "VideoGame",
+
+                            "name": "Rising Storm 2: Vietnam",
+
+                            "description": "Red Orchestra Series' take on the Vietnam War: 64-player online battles; M16, M79, Hueys and Attack Helicopters; the AK, Shotguns, Toe-Popper Mines, Tripwires, Tunnels and more. | Brutal. Authentic. Gritty.",
+
+                            "url": "http://rs2vietnam.com",
+
+                            "logo": "http://media.tripwirecdn.com/rs2website/images/contest/contest_logo.png"
+
+                            "image": "http://media.tripwirecdn.com/rs2website/images/contest/contest_logo.png",
+
+                            "screenshot": "http://media.tripwirecdn.com/rs2website/images/keyart/backgroundart.jpg",
+
+                            "sameAs" : ["https://en.wikipedia.org/wiki/Rising_Storm_2:_Vietnam",
+
+                            "https://www.youtube.com/user/tripwireinteractive",
+
+                            "http://discord.gg/rs2vietnam",
+
+                            "http://twitter.com/rs2vietnam",
+
+                            "http://facebook.com/rs2vietnam",
+
+                            "http://reddit.com/r/rs2vietnam"
+
+                            ],
+
+                            "playMode": "MultiPlayer",
+
+                            "offers":{
+
+							    "@type": "Offer",
+
+							    "availability": "http://schema.org/InStock",
+
+							    "price": "22.49",
+
+							    "priceCurrency": "USD",
+
+                            "author": {
+
+                              "name":"Antimatter Games",
+
+                              "url":"http://www.antimattergames.com/"
+
+                              	},
+
+                            "publisher":{
+
+                              "name":"Tripwire Interactive",
+
+                              "url":"http://tripwireinteractive.com/"
+
+                              	},
+
+                            "gameLocation":["South Vietnam", "Cuchi", "Song Be", "An Lao Valley", "Hamburger Hill"],
+
+                            "trailer": {
+
+                              "@type" : "VideoObject",
+
+                              "caption" : "Full Length Launch Trailer",
+
+                              "description": "NEW RISING STORM 2: VIETNAM FULL LENGTH LAUNCH TRAILER",
+
+                              "url" : "https://www.youtube.com/watch?v=YqyeNcNKxXs",
+
+                              "name" : "Rising Storm 2: Vietnam Launch Trailer",
+
+                              "thumbnailUrl" : "http://media.tripwirecdn.com/rs2website/images/keyart/trailerthumb.jpg",
+
+                              "uploadDate" : "2017-5-30"
+
+                              "duration": "PT2M06S",
+
+                              "embedUrl": "https://www.youtube.com/embed/YqyeNcNKx3",
+
+                              	},
+
+                            "operatingSystem" : ["https://en.wikipedia.org/wiki/Windows_10", "https://en.wikipedia.org/wiki/Windows_8", "https://en.wikipedia.org/wiki/Windows_7"],
+
+                            "applicationCategory" : "Game",
+
+                            "genre":["Action", "First-person Shooter"],
+
+                            "exampleOfWork": {
+
+                              "@type": "VideoGame",
+
+                              "name": "Rising Storm 2: Vietnam",
+
+                              "gamePlatform":["https://en.wikipedia.org/wiki/Windows_10", "https://en.wikipedia.org/wiki/Windows_8", "https://en.wikipedia.org/wiki/Windows_7"],
+
+                              "operatingSystem" : ["https://en.wikipedia.org/wiki/Windows_10", "https://en.wikipedia.org/wiki/Windows_8", "https://en.wikipedia.org/wiki/Windows_7"],
+
+                              "applicationCategory" : "Game",
+
+                              "genre":["Action", "First-person Shooter"],
+
+                              "releaseEvent": "",
+
+                              "contentRating":"Unrated",
+
+						      "releasedEvent":{
+
+						        "@type":"PublicationEvent",
+
+						        "startDate":"2017-05-30",
+
+						        "location":{
+
+						          "@type":"Country",
+
+						          "name":"US"}
+
+                              	}
+
+            }
+
+        }
+
+</script>
+
+
+
+<script src="./modding contest_files/jquery.min.js.download"></script>
+
+
+
+<script>
+
+! function(t, o, e, n, a, l, c) {
+
+    t.GoogleAnalyticsObject = a, t[a] = t[a] || function() {
+
+        (t[a].q = t[a].q || []).push(arguments)
+
+    }, t[a].l = 1 * new Date, l = o.createElement(e), c = o.getElementsByTagName(e)[0], l.async = 1, l.src = n, c.parentNode.insertBefore(l, c)
+
+}(window, document, "script", "https://www.google-analytics.com/analytics.js", "ga"), ga("create", "UA-384258-12", "auto"), ga("send", "pageview"), ga('set', 'anonymizeIp', true),
+
+    function() {
+
+        function t(t, o) {
+
+            var e = document.createElement("script");
+
+            e.src = t;
+
+            var n = document.getElementsByTagName("head")[0],
+
+                a = !1;
+
+            e.onload = e.onreadystatechange = function() {
+
+                a || this.readyState && "loaded" != this.readyState && "complete" != this.readyState || (a = !0, o(), e.onload = e.onreadystatechange = null, n.removeChild(e))
+
+            }, n.appendChild(e)
+
+        }
+
+        t("https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js", function() {
+
+            function t() {
+
+                $("body").on("touchstart", function(t) {
+
+                    $("body").hasClass("noscroll") && t.preventDefault()
+
+                })
+
+            }
+
+            $(document).ready(function() {
+
+                $("#rules-link").click(function() {
+
+                    return $("html, body").animate({
+
+                        scrollTop: $("#rules-container").offset().top
+
+                    }, 1e3), !1
+
+                })
+
+            }), $(document).ready(function() {
+
+                $("#back-to-top1,#back-to-top2").click(function() {
+
+                    return $("html, body").animate({
+
+                        scrollTop: $("#logo-intro-container").offset().top
+
+                    }, 1e3), !1
+
+                })
+
+            }), $(document).ready(function() {
+
+                $("#learn-judging").click(function() {
+
+                    return $("html, body").animate({
+
+                        scrollTop: $("#criteria-container").offset().top
+
+                    }, 1e3), !1
+
+                })
+
+            });
+
+        })
+
+    }();
+
+</script>
+
+-->
+
+<script src="./modding contest_files/jquery.min.js.download"></script>
+	
+</head>
+
+<body>
+
+<main>
+
+<div id="content-container">
+
+	<div id="logo-intro-container">
+
+  <center>
+
+		<a href="http://rs2vietnam.com/" alt="Rising Storm 2: Vietnam Official Website" title="Rising Storm 2: Vietnam Official Website" target="_blank"><img src="https://drivenarts.github.io/img/Stamp-logo-full-size-no-padding.png" height="175px" padding="50px"></a>
+
+  </center>
+
+	</div>
+
+
+
+<div id="overview-container">
+
+
+
+		<hr>
+
+                          <center><div class="socialmedia-icons-container">
+
+                                  <a href="http://discord.gg/rs2vietnam" target="_blank"><img class="social-icon" title="Discord" src="./modding contest_files/discord.png" alt="Discord" width="32" height="32"></a>
+
+                                  <a href="http://steamcommunity.com/app/418460" target="_blank"><img class="social-icon" title="Steam Community" src="./modding contest_files/steam.png" alt="Discord" width="32" height="32"></a>
+
+                                  <a href="http://twitter.com/rs2vietnam" target="_blank"><img class="social-icon" title="Twitter" src="./modding contest_files/twitter.png" alt="Twitter" width="32" height="32"></a>
+
+                                  <a href="http://facebook.com/rs2vietnam" target="_blank"><img class="social-icon" title="Facebook" src="./modding contest_files/facebook.png" alt="Facebook" width="32" height="32"></a>
+
+                                  <a href="https://www.youtube.com/playlist?list=PLmp9GQ3dI5Td93HF_8SLSzPYaMXQEYAtX" target="_blank"><img class="social-icon" title="Youtube" src="./modding contest_files/youtube.png" alt="Youtube" width="32" height="32"></a>
+
+                                  <a href="http://reddit.com/r/rs2vietnam" target="_blank"><img class="social-icon" title="Reddit" src="./modding contest_files/reddit.png" alt="Reddit" width="32" height="32"></a>
+
+                          </div></center>
+
+                </div>
+
+
+
+		<p><a href="http://www.drivenarts.com/" target="_blank" alt="Driven Arts">Driven Arts</a> and ______________, developers of <a href="http://playdaysofwar.com/">Days of War</a>, are proud to present the $50,000 Days of War mapping contest, bring your skills and creativity for a chance to win one of these amazing cash prizes!</p>
+
+
+
+    <p>Participants will have a chance to have their creations turned official and included in <i>Days of War</i>.</p>
+
+			<div id="summary" class="phase-container">
+
+				<p><span class="green">$50,000 in cash prizes</span> will be awarded to top submissions
+				</p>
+
+        <p>The prizes and winners will be announced in March</p>
+
+					
+
+      </div>
+
+      <br>
+
+		<h3>How to Enter:</h3>
+
+
+
+    <p>Click the button below and fill out the following Contest Entry form. Please be sure to read the <a href="https://rs2vietnam.com/contest/#rules-container" id="rules-link">Contest Rules &amp; Terms</a> carefully.</p>
+
+		<div id="submissionform"><a class="buttonBIG" href="https://forms.gle/WTZSN4wPP5AfcqgYA" target="_blank" title="Contest Submission Form">SIGN UP FOR COMPETITION</a></div>
+
+
+
+
+
+
+
+
+
+
+
+
+          <br>
+
+    <p><i>Rising Storm 2: Vietnam</i> is required to access the SDK. If you do not own a copy, grab one now!</p>
+
+     
+
+ 
+
+
+
+
+<div id="categories-container">
+
+<br>
+
+<br>
+
+<h1>Prizes &amp; Categories</h1>
+
+<hr>
+
+<p>The <i>$40,000 Vietnam Modding Contest</i> has 2 separate Rounds and 2 categories to compete in - <b>Best Map</b> and <b>Best Mod</b> with a total of <span class="green">$40,000</span> in cash prizes to be given away.</p>
+
+<p>Prizes will be awarded to top entries (1st, 2nd, and 3rd) for <b>Best Map</b> and Judges will select top entries to distribute cash prizes for <b>Best Mod</b> from a Prize Pool.</p>
+
+			<div id="phase-1" class="phase-container">
+
+			<center>
+
+					<h2>ROUND 1</h2>
+
+						<b>Starts:</b> NOW!
+
+						<br><b>Ends:</b> March 31st, 2020
+
+            <br>
+
+            
+						<hr>
+
+						
+
+							<h3>BEST MAP</h3>
+
+							1st Place - $20,000
+
+							<br>2nd Place - $15,000
+
+							<br>3rd Place - $8,000
+
+							
+
+			</center>
+
+			</div>
+
+			
+
+      <br>
+
+      <br>
+
+<br>
+
+<br>
+
+<p>Winners in each category will be announced and contacted within 4 weeks after each Round comes to an end.</p>
+
+<p>The following contest categories are defined as:</p>
+
+<br>
+
+<br>
+
+<center>
+
+	<div id="best-map" class="phase-container">
+
+		<img src="./modding contest_files/map_img.jpg" width="82" height="82">
+
+		<h3>BEST MAP</h3>
+
+			<hr>
+
+			<p>A map created within World War II in Europe, North Africa, or the Eastern Front/Russia.</p>
+
+			
+
+	</div>
+	</center>
+
+</div>
+
+	<div id="criteria-container">
+
+  <br>
+
+  <br>
+
+<h1>Judging Criteria</h1>
+
+<hr>
+
+<div id="judge-description">
+
+			<p>The Judging Team is composed of experienced Games Industry professionals from Driven Arts. Aiding in separating the wheat from the chaff, the Community will participate by helping to decide and narrow down the best submissions from the contest.</p>
+
+			<p>Judges will meticulously review each submission and award the top enteries for Best Map and Best Mod based on the following criteria:</p>
+
+<div id="criteria">
+
+1. Design and Gameplay
+
+<br>
+
+2. Visual Quality
+
+<br>
+
+3. Creativity
+
+<br>
+
+4. Polish / Completeness
+
+</div>
+
+<br>
+
+
+
+			<i>NOTE: The category for Best Mod will only be judged based on relevant criteria - for example, Game Modes will not be judged on Visual Quality if there are no new UI elements.</i>
+
+</div>
+
+
+
+</div>
+
+
+
+<div id="rules-container">
+
+<br>
+
+<br>
+
+<h1>Contest Rules &amp; Terms</h1>
+
+<hr>
+
+<br>
+
+<br>
+
+<p>All content submitted must be allowed to be distributed with Days of War. This means submissions must be completely original content, modified/unmodified versions of Driven Arts’ games or you must have full permission from the original author to use their content in this contest. And please don’t make one-to-one copies of maps from other games.</p>
+
+
+
+<p>Your Map/Mod must work with the current version of Rising Storm 2: Vietnam available via Steam and must be made available via <a href="http://steamcommunity.com/app/454350/workshop/" target="_blank" alt="Steam Workshop"> Days of War's Steam Workshop</a>.</p><p></p>
+
+
+
+<p>All submissions to this contest must also be made publicly available using 
+
+
+
+</p><p>To enter the contest, you must also <a href="https://goo.gl/forms" target="_blank" title="Contest Entry Form">complete the submission form</a>, including your full contact details and a link to your submission on Steam Workshop. Finally, by entering the contest, you consent to your submission remaining available on Steam Workshop after the contest comes to a close.</p>
+
+
+
+<p>The community will have an opportunity to choose the top entrants in each Round and Category, with the final judging being carried out by members of the development team at Driven Arts. <a href="https://rs2vietnam.com/contest/#criteria-container" id="learn-judging">Learn more about the judging criteria</a>.</p>
+
+
+
+<p>Cash prizes are in United States Dollars (USD) and are non-negotiable. Prize-winners are responsible for any or all related taxes incurred. Driven Arts is not obliged to award all the prizes if there is a lack of entries or entries are not of acceptable quality.</p>
+
+
+
+<p>Please keep in mind that anything that is illegal, breaks the terms of our EULA or is otherwise offensive will not be allowed. Employees or contractors of Driven Arts are automatically disqualified.</p>
+
+
+
+<br>
+
+<br>
+
+<br>
+
+<br>
+
+</div>
+
+</div>
+
+</main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body></html>

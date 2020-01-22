@@ -1,0 +1,311 @@
+/* (c) 2020 Driven Arts - All Rights Reserved */
+
+/* Variables */
+:root {
+    --accent: #E9CE16;
+    --secondary: #FFFFFF;
+    --background: #09090A;
+}
+
+/* General styles */
+body {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    font-family: 'Neuton', serif;
+    background-color: var(--background);
+}
+
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    height: 100%;
+    width: 100%;
+}
+
+section {
+    width: 100%;
+    height: auto;
+    display: flex;
+}
+
+/* Headings */
+h1, a[href] {
+    color: var(--accent);
+    margin: 0;
+    font-size: 48pt;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+h2 {
+    color: var(--secondary);
+    margin: 0;
+    font-size: 26pt;
+    font-weight: normal;
+    margin-bottom: -10px;
+}
+
+/* The small "link" icon on links */
+a>i {
+    color: var(--accent);
+    font-size: 12pt;
+    visibility: hidden;
+    opacity: 0;
+    vertical-align: top;
+    transition: 0.1s linear padding-left, 0.1s linear opacity;
+}
+
+/* Show the small "link" icon when a link is hovered */
+a[href]:hover>i {
+    padding-left: 0.5em;
+    padding-top: 1.5em;
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Video wrapper (landing section) */
+.video-wrapper {
+    width: 100%;
+    height: 80%;
+    background-image: url(../img/chateau.png);
+    background-position: center;
+    background-size: cover;
+    pointer-events: none;
+}
+
+.video-wrapper>iframe {
+    width: 100%;
+    height: 100%;
+}
+
+/* Several styles of grunge for transitioning the sections */
+.grunge {
+    position: absolute;
+    width: 100%;
+}
+
+.grunge.grunge-1 {
+    background-image: url(../img/grunge1_mirrored.png);
+    height: 120px;
+    margin-top: -100px;
+    background-size: contain;
+}
+
+.grunge.grunge-2 {
+    background-image: url(../img/grunge2.png);
+    height: 120px;
+    margin-top: -37px;
+    background-size: contain;
+}
+
+.grunge.grunge-3 {
+    background-image: url(../img/grunge3.png);
+    height: 120px;
+    margin-top: -50px;
+    background-size: cover;
+}
+
+.grunge.grunge-3-mirrored {
+    background-image: url(../img/grunge3_mirrored.png);
+    height: 120px;
+    margin-top: -85px;
+    background-size: cover;   
+}
+
+.grunge.grunge-4 {
+    background-image: url(../img/grunge4.png);
+    height: 120px;
+    background-size: cover;       
+}
+
+.grunge.grunge-4-mirrored {
+    background-image: url(../img/grunge4_mirrored.png);
+    height: 120px;
+    background-size: contain;
+    margin-top: -117px;
+}
+
+/* Links section */
+.links {
+    width: 100%;
+    height: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.links>.dow-logo {
+    background-image: url(../img/dow_logo.png);
+    background-size: contain;
+    height: inherit;
+    width: inherit;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-top: 0%;
+}
+
+.links>.buttons {
+    display: flex;
+    margin-top: 3%;
+}
+
+.links>.buttons>a {
+    font-family: 'Neuton', serif;
+    font-weight: bold;
+    font-size: 18pt;
+    color: var(--secondary);
+    text-decoration: none;
+    border: 3px solid var(--accent);
+    width: 200px;
+    text-align: center;
+    padding-top: 0.4em;
+    padding-bottom: 0.5em;
+    margin-right: 1.5em;
+    transition: 0.1s linear all;
+}
+
+.links>.buttons>a:last-child {
+    margin-right: 0;
+}
+
+.links>.buttons>a.primary {
+    background-color: var(--accent);
+    color: var(--background);
+}
+
+.links>.buttons>a.primary:hover {
+    color: var(--secondary);
+    background-color: rgba(233, 206, 22, 0.25);
+}
+
+.links>.buttons>a:hover {
+    background-color: var(--accent);
+    color: var(--background);    
+}
+
+/* Standard size sections */
+.maps, 
+.factions, 
+.editor {
+    width: 100%;
+    height: 40%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+/* Section text container */
+.maps>.maps-text, 
+.factions>.factions-text, 
+.weapons>.weapons-text, 
+.editor>.editor-text {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+/* Maps section image */
+.maps>.maps-image {
+    background-image: url(../img/kaysersberg.png);
+    background-size: cover;
+}
+
+.maps>.maps-image::after {
+    content: " ";
+    background-image: url(../img/triangle.svg);
+    height: 100%;
+    width: 19.5%;
+    display: block;
+    z-index: 100;
+    background-size: cover;
+    margin-left: auto;
+    transform: scale(1.01); /* Fixes bleeding edges */
+}
+
+/* Factions section image */
+.factions>.factions-image {
+    background-image: url(../img/round-end-background.jpg);
+    background-size: cover;
+}
+
+.factions>.factions-image::before {
+    content: " ";
+    background-image: url(../img/triangle.svg);
+    height: 100%;
+    width: 19.5%;
+    display: block;
+    z-index: 100;
+    background-size: cover;
+    transform: rotate(180deg) scale(1.01); /* Fixes bleeding edges */
+}
+
+/* Editor section image */
+.editor>.editor-image {
+    background-image: url(../img/editor.png);
+    background-size: cover;
+    background-position: center;
+}
+
+.editor>.editor-image::after {
+    content: " ";
+    background-image: url(../img/triangle.svg);
+    height: 100%;
+    width: 19.5%;
+    display: block;
+    z-index: 100;
+    background-size: cover;
+    margin-left: auto;
+    transform: scale(1.01); /* Fixes bleeding edges */
+}
+
+/* Weapons section */
+.weapons {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    background-image: url(../img/weapons.png);
+    background-size: 50%;
+}
+
+/* Footer */
+.footer {
+    width: 100%;
+    height: 10%;
+    margin-top: 2.5%;
+}
+
+.footer>.da-logo {
+    background-image: url(../img/da_logo.png);
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.footer>p {
+    color: #444444;
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 10pt;
+    margin-top: 0;
+    padding-bottom: 20px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #222222;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #444444;
+}

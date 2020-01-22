@@ -309,3 +309,54 @@ a[href]:hover>i {
 ::-webkit-scrollbar-thumb:hover {
     background-color: #444444;
 }
+
+@media (max-width: 1050px) {
+    .grunge.grunge-1, .grunge.grunge-2 {
+        background-size: cover;
+    }
+
+    .links {
+        height: 50%;
+    }
+
+    .links>.dow-logo {
+        margin-top: 10%;
+        height: 500px;
+    }
+
+    .links>.buttons {
+        flex-direction: column;
+        margin-top: 20px;
+        margin-bottom: 10%;
+    }
+
+    .links>.buttons>a {
+        margin-right: 0;
+        margin-bottom: 0.5em;
+    }
+
+    .maps, 
+    .factions, 
+    .editor {
+        height: 80%;
+        grid-template-columns: none;
+        grid-template-rows: repeat(2, 1fr);
+    }
+
+    .maps>.maps-image::after, 
+    .factions>.factions-image::before, 
+    .editor>.editor-image::after {
+        opacity: 0;
+    }
+
+    .factions>.factions-image {
+        grid-row: 1;
+    }
+
+    .weapons {
+        background-size: 100%;
+    }
+
+    .footer>.da-logo {
+        height: 70%;
+    }

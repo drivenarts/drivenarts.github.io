@@ -1,112 +1,120 @@
+<!-- (c) 2020 Driven Arts - All Rights Reserved -->
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-147954386-12"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-	  gtag('config', 'UA-147954386-12');
-	</script>
-	
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Raleway:400,700,900|Neuton:400,200,700' rel='stylesheet' type='text/css'>
-    <link href="style.css" rel="stylesheet" media="screen">
-	<title>DrivenArts Games</title>
-    <link rel="icon" href="http://drivenarts.github.io/favicon.ico" type="image/x-icon"/>
-</head>
+    <head>
+        <!-- Meta tags -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-<body onload="onload();">
+        <!-- Title -->
+        <title>Days of War</title>
 
-	<header id="header">
-		<a href="index.html" class="logo">DrivenArts</a>
-		<div id="menu" class="menuWrap">
-			<input type="checkbox" id="menuBtn"/><label for="menuBtn" id="hamburger">MENU</label>
-			<ul id="nav">
-				
-	            <li id="btnGames">
-					<input type="checkbox" id="gamesMenu"/><label for="gamesMenu">GAMES</label>
-					<ul class="dropdown">
-						<li><a href="dow.html" id="btnDow">Days of War</a></li>
-					</ul>
-				</li>
-	            <li><a target="_blank" href="https://steamcommunity.com/app/454350/discussions">FORUMS</a></li>
-				<li><a target="_blank" href="https://discordapp.com/invite/cmVUZZs">DISCORD</a></li>
-                <li><a href="about.html">ABOUT US</a></li>
-                <!-- <li><a href="press.html">PRESS</a></li> 
-		<li id="btnJoin"><a target="_blank" href="http://store.steampowered.com/app/454350">PURCHASE</a></li> -->
-			</ul>
-		</div>
-	</header>
-	<div id="content">
-		<div id="overlay">
-			<div id="dowCTA" data="overlay">
-				<a href="#" onclick="this.parentNode.parentNode.style.opacity = '0'" class="close">x</a>
-				<img id="dowOverlayLogo" src="img/Stamp-logo-full-size-no-padding.png"/>
-				<div id="mc_embed_signup">
-					<form action="https://drivenarts.us12.list-manage.com/subscribe/post?u=e9a02aacca31a3978868c5927&amp;id=d3b6d25dce" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-					    <div id="mc_embed_signup_scroll">
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Neuton&display=swap" rel="stylesheet">
 
-					  <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Enter Your Email Address" required>
-					      <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-					      <div style="position: absolute; left: -5000px;" aria-hidden="true">
-					  <input type="text" name="b_e9a02aacca31a3978868c5927_ca1e97b42e" tabindex="-1" value=""></div>
-					      <div class="clear">
-					  <input type="submit" value="Enlist" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
-			        	   </div>
-					</form>
-				</div>
-				<p class="brief signupText" style="text-transform:uppercase; color: white; letter-spacing: .25em;">Sign up for the Closed Beta</p>
-			</div>
-			<img id="fade" src="img/fade.png" data="overlay"/>
-		</div>
-               <video autoplay="" muted="" onended="onVideoEnded();" id="splash-video">
-               </video>
-	</div>
-	<footer id="footer">
-		<a href="index.html" class="logo">DrivenArts</a>
-		<ul id="footerNav">
-			<li><a href="dow.html">Days of War</a></li>
-			<li>|</li>
-			<li><a href="about.html">About Us</a>
-			<li>|</li>
-			<li><a href="mailto:contact@drivenarts.com">Contact</a></li>
-		</ul>
-		<p id="copyright">&copy;2019 DrivenArts</p>
-	</footer>
- <script>
-        var video_list      = ["https://dow-website.herokuapp.com/video/amalfi.mp4",
-                                "https://dow-website.herokuapp.com/video/cathedral.mp4",
-                                "https://dow-website.herokuapp.com/video/chateau.mp4",
-                                "https://dow-website.herokuapp.com/video/dockyard.mp4",
-                                "https://dow-website.herokuapp.com/video/kberg.mp4",
-                                "https://dow-website.herokuapp.com/video/riverbed.mp4"
-                            ];
-        var video_index     = 0;
-        var video_player    = null;
+        <!-- Icons -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+        
+        <!-- Stylesheets -->
+        <link rel="stylesheet" href="main.css"/>
 
-        function onload(){
-            console.log("body loaded");
-            video_player        = document.getElementById("splash-video");
-            video_player.setAttribute("src", video_list[video_index]);
-	    video_player.load();
-            video_player.play();
-        }
+        <!-- Favicon -->
+        <link rel="shortcut icon" type="image/png" href="img/favicon.png"/>
+    
+        <!-- OG Tags -->
+        <meta property="og:title" content="Days of War"/>
+        <meta property="og:type" content="website"/>
+        <meta property="og:url" content="http://playdaysofwar.com"/>
+        <meta property="og:image" content="img/dow_poster.png"/>
+        <meta property="og:description" content="Days of War is an upcoming multiplayer team-based FPS, set during the conflict that defined the modern world: World War II."/>
+        <meta name="twitter:card" content="summary"/>
+        <meta name="twitter:title" content="Days of War"/>
+        <meta name="twitter:description" content="Days of War is an upcoming multiplayer team-based FPS, set during the conflict that defined the modern world: World War II."/>
+        <meta name="twitter:image" content="img/dow_poster.png"/>
+        <meta name="twitter:site" content="@playdaysofwar"/>
+    </head>
+    <body>
+        <!-- Top video wrapper -->
+        <div class="video-wrapper">
+            <!--
+                <iframe src="https://www.youtube.com/embed/aKXRqpB3sdg?controls=0&autoplay=1&loop=1&modestbranding=1&showinfo=0&disablekb=1" frameborder="0" allow="accelerometer; autoplay; loop; modestbranding; showinfo; disablekb; encrypted-media; gyroscope; picture-in-picture"></iframe>
+            -->
+        </div>
 
-        function onVideoEnded(){
-            console.log("video ended");
-            if(video_index < video_list.length - 1){
-                video_index++;
-            }
-            else{
-                video_index = 0;
-            }
-            video_player.setAttribute("src", video_list[video_index]);
-	    video_player.load();
-            video_player.play();
-        }
-    </script>
-</body>
+        <!-- Decoration -->
+        <div class="grunge grunge-1"></div>
+
+        <!-- Links Section -->
+        <div class="links">
+            <div class="dow-logo"></div>
+            <div class="buttons">
+                <a href="https://daysofwar.gamepedia.com" target="_blank">WIKI</a>
+                <a class="primary" href="https://store.steampowered.com/app/454350/Days_of_War/" target="_blank">WISHLIST NOW</a>
+                <a href="https://discord.gg/daysofwar" target="_blank">DISCORD</a>
+            </div>
+        </div>
+
+        <!-- Decoration -->
+        <div class="grunge grunge-3"></div>
+
+        <!-- Maps Section -->
+        <div class="maps">
+            <div class="maps-image"></div>
+            <div class="maps-text">
+                <h2>DISCOVER</h2>
+                <a href="https://daysofwar.gamepedia.com/Maps" target="_blank">12 MAPS<i class="fas fa-external-link-alt"></i></a>
+                <h2>FROM ALL ACROSS<br/>THE GLOBE</h2>
+            </div>
+        </div>
+
+        <!-- Decoration -->
+        <div class="grunge grunge-2"></div>
+
+        <!-- factions Section -->
+        <div class="factions">
+            <div class="factions-text">
+                <h2>PLAY</h2>
+                <a href="https://daysofwar.gamepedia.com/Teams_and_Classes" target="_blank">FOUR<i class="fas fa-external-link-alt"></i></a>
+                <h2>UNIQUE FACTIONS</h2>
+            </div>
+            <div class="factions-image"></div>
+        </div>
+
+        <!-- Decoration -->
+        <div class="grunge grunge-3-mirrored"></div>
+        <div class="grunge grunge-4"></div>
+
+        <!-- Weapons Section-->
+        <div class="weapons">
+            <div class="weapons-text">
+                <h2>OVER</h2>
+                <a href="https://daysofwar.gamepedia.com/Weapons" target="_blank">SIXTY<i class="fas fa-external-link-alt"></i></a>
+                <h2>PLAYABLE WEAPONS</h2>
+            </div>
+        </div>
+
+        <!-- Decoration -->
+        <div class="grunge grunge-4-mirrored"></div>
+        <div class="grunge grunge-3"></div>
+
+        <div class="editor">
+            <div class="editor-image"></div>
+            <div class="editor-text">
+                <h2>CREATE</h2>
+                <a href="https://daysofwar.gamepedia.com/Map_Editor" target="_blank">CUSTOM MAPS<i class="fas fa-external-link-alt"></i></a>
+                <h2>WITH OUR EDITOR</h2>
+            </div>
+        </div>
+
+        <!-- Decoration -->
+        <div class="grunge grunge-4-mirrored"></div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="da-logo"></div>
+            <p>&copy; 2020 DRIVENARTS - ALL RIGHTS RESERVED</p>
+        </div>
+    </body>
 </html>

@@ -68,7 +68,7 @@ a[href]:hover>i {
 .video-wrapper {
     width: 100%;
     height: 80%;
-    background-image: url(../img/lenin.jpg);
+    background-image: url(../img/lenin.png);
     background-position: center;
     background-size: cover;
     pointer-events: none;

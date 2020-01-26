@@ -30,7 +30,7 @@ section {
 }
 
 /* Headings */
-h1, a[href] {
+h1, .weapons-text>a, .factions-text>a, .maps-text>a, .editor-text>a {
     color: var(--accent);
     margin: 0;
     font-size: 48pt;
@@ -47,7 +47,7 @@ h2 {
 }
 
 /* The small "link" icon on links */
-a>i {
+.weapons-text>a>i, .factions-text>a>i, .maps-text>a>i, .editor-text>a>i {
     color: var(--accent);
     font-size: 12pt;
     visibility: hidden;
@@ -57,7 +57,7 @@ a>i {
 }
 
 /* Show the small "link" icon when a link is hovered */
-a[href]:hover>i {
+.weapons-text>a[href]:hover>i, .factions-text>a[href]:hover>i, .maps-text>a[href]:hover>i, .editor-text>a[href]:hover>i {
     padding-left: 0.5em;
     padding-top: 1.5em;
     visibility: visible;
@@ -148,7 +148,7 @@ a[href]:hover>i {
 
 .links>.buttons {
     display: flex;
-    margin-top: 3%;
+    margin-top: 2%;
 }
 
 .links>.buttons>a {
@@ -183,6 +183,29 @@ a[href]:hover>i {
 .links>.buttons>a:hover {
     background-color: var(--accent);
     color: var(--background);    
+}
+
+.links>.social {
+    width: 200px;
+    text-align: center;
+    padding-top: 1.5%;
+    z-index: 100;
+}
+
+.links>.social>a {
+    color: white;
+    font-size: 18pt;
+    font-weight: normal;
+    padding-right: 1em;
+    transition: 0.1s linear all;
+}
+
+.links>.social>a:last-child {
+    padding-right: 0;
+}
+
+.links>.social>a:hover {
+    color: var(--accent);
 }
 
 /* Standard size sections */
@@ -296,6 +319,18 @@ a[href]:hover>i {
     padding-bottom: 20px;
 }
 
+.footer>p>a {
+    transition: 0.1s linear all;
+}
+
+.footer>p>a:hover {
+    color: white !important;
+}
+
+.footer>p>a:visited, .footer>p>a:focus {
+    color: #444444;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
     width: 8px;
@@ -310,9 +345,14 @@ a[href]:hover>i {
     background-color: #444444;
 }
 
+
 @media (max-width: 1050px) {
     .grunge.grunge-1, .grunge.grunge-2 {
         background-size: cover;
+    }
+
+    .grunge.grunge-4-mirrored.last {
+        visibility: hidden;
     }
 
     .links {
@@ -327,12 +367,17 @@ a[href]:hover>i {
     .links>.buttons {
         flex-direction: column;
         margin-top: 20px;
-        margin-bottom: 10%;
+        margin-bottom: 0;
     }
 
     .links>.buttons>a {
         margin-right: 0;
         margin-bottom: 0.5em;
+    }
+
+    .links>.social {
+        padding-bottom: 2em;
+        z-index: 100;
     }
 
     .maps, 
@@ -360,3 +405,4 @@ a[href]:hover>i {
     .footer>.da-logo {
         height: 70%;
     }
+}

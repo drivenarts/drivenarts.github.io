@@ -246,7 +246,7 @@ h2 {
     z-index: 100;
     background-size: cover;
     margin-left: auto;
-    transform: scale(1.01); /* Fixes bleeding edges */
+    transform: scale(1.05); /* Fixes bleeding edges */
 }
 
 /* Factions section image */
@@ -263,7 +263,7 @@ h2 {
     display: block;
     z-index: 100;
     background-size: cover;
-    transform: rotate(180deg) scale(1.01); /* Fixes bleeding edges */
+    transform: rotate(180deg) scale(1.05); /* Fixes bleeding edges */
 }
 
 /* Editor section image */
@@ -282,7 +282,7 @@ h2 {
     z-index: 100;
     background-size: cover;
     margin-left: auto;
-    transform: scale(1.01); /* Fixes bleeding edges */
+    transform: scale(1.05); /* Fixes bleeding edges */
 }
 
 /* Weapons section */

@@ -4,7 +4,15 @@ Please check these patch notes for any questions you have about what has changed
 
 Join us on Discord if you'd like to chat with the community about any ideas or issues you may have.
 
-v396
+2.0.0.400
+-Bots should no longer play on the server when all human players have left (to save CPU for server hosts)
+-Fixed bug where Jump/Land sounds were not playing for other players
+
+2.0.0.398
+-Added support for joining a game from the Steam friends list
+-Removed recoil from melee weapons
+
+2.0.0.396
 -Addressed performance in Riverbed by removing expensive trees
 -Fixed issue on Railyard where American flag was showing instead of Russian for the allied team
 -Round end will now show 'Victory' or 'Defeat' relative to the player
@@ -13,3 +21,7 @@ v396
 -Fixed bug where updating server game mode settings would set MaxPlayers=1
 -Fixed bug where weapon fire loop would continue after game start warmup
 -Lowered match time from 20 to 15 minutes
+
+Known issues
+-Foliage on dow_riverbed and dow_carentan is not as performant as other maps.
+-Custom maps greater than 2Gb in size cannot be seen on the in-game workshop (they can still be downloaded from the steam workshop)

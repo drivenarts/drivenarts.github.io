@@ -1,0 +1,111 @@
+  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-147954386-12"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+	  gtag('config', 'UA-147954386-12');
+	</script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Raleway:400,700,900|Neuton:400,200,700' rel='stylesheet' type='text/css'>
+    <link href="style.css" rel="stylesheet" media="screen">
+	<title>DrivenArts Games</title>
+    <link rel="icon" href="http://drivenarts.github.io/favicon.ico" type="image/x-icon"/>
+</head>
+
+<body onload="onload();">
+	
+	<header id="header">
+		<a href="index.html" class="logo">DrivenArts</a>
+		<div id="menu" class="menuWrap">
+			<input type="checkbox" id="menuBtn"/><label for="menuBtn" id="hamburger">MENU</label>
+			<ul id="nav">
+				
+	            <li id="btnGames">
+					<input type="checkbox" id="gamesMenu"/><label for="gamesMenu">GAMES</label>
+					<ul class="dropdown">
+						<li><a href="dow.html" id="btnDow">Days of War</a></li>
+					</ul>
+				</li>
+	            <li><a target="_blank" href="https://steamcommunity.com/app/454350/discussions">FORUMS</a></li>
+				<li><a target="_blank" href="https://discordapp.com/invite/cmVUZZs">DISCORD</a></li>
+                <li><a href="about.html">ABOUT US</a></li>
+                <!-- <li><a href="press.html">PRESS</a></li> 
+		<li id="btnJoin"><a target="_blank" href="http://store.steampowered.com/app/454350">PURCHASE</a></li> -->
+			</ul>
+		</div>
+	</header>
+	<div id="content">
+		<div id="overlay">
+			<div id="dowCTA" data="overlay">
+				<a href="#" onclick="this.parentNode.parentNode.style.opacity = '0'" class="close">x</a>
+				<img id="dowOverlayLogo" src="img/Stamp-logo-full-size-no-padding.png"/>
+				<div id="mc_embed_signup">
+					<form action="https://drivenarts.us12.list-manage.com/subscribe/post?u=e9a02aacca31a3978868c5927&amp;id=d3b6d25dce" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+					    <div id="mc_embed_signup_scroll">
+
+					  <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Enter Your Email Address" required>
+					      <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+					      <div style="position: absolute; left: -5000px;" aria-hidden="true">
+					  <input type="text" name="b_e9a02aacca31a3978868c5927_ca1e97b42e" tabindex="-1" value=""></div>
+					      <div class="clear">
+					  <input type="submit" value="Enlist" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+			        	   </div>
+					</form>
+				</div>
+				<p class="brief signupText" style="text-transform:uppercase; color: white; letter-spacing: .25em;">Sign up for the Closed Beta</p>
+			</div>
+			<img id="fade" src="img/fade.png" data="overlay"/>
+     		</div>
+		<video autoplay="" muted="" onended="onVideoEnded();" id="splash-video">
+		</video>
+	</div>
+	<footer id="footer">
+		<a href="index.html" class="logo">DrivenArts</a>
+		<ul id="footerNav">
+			<li><a href="dow.html">Days of War</a></li>
+			<li>|</li>
+			<li><a href="about.html">About Us</a>
+			<li>|</li>
+			<li><a href="mailto:contact@drivenarts.com">Contact</a></li>
+		</ul>
+		<p id="copyright">&copy;2019 DrivenArts</p>
+	</footer>
+ <script>
+        var video_list      = ["https://dow-website.herokuapp.com/video/amalfi.mp4",
+                                "https://dow-website.herokuapp.com/video/cathedral.mp4",
+                                "https://dow-website.herokuapp.com/video/chateau.mp4",
+                                "https://dow-website.herokuapp.com/video/dockyard.mp4",
+                                "https://dow-website.herokuapp.com/video/kberg.mp4",
+                                "https://dow-website.herokuapp.com/video/riverbed.mp4"
+                            ];
+        var video_index     = 0;
+        var video_player    = null;
+        function onload(){
+            console.log("body loaded");
+            video_player        = document.getElementById("splash-video");
+            video_player.setAttribute("src", video_list[video_index]);
+	    video_player.load();
+            video_player.play();
+        }
+        function onVideoEnded(){
+            console.log("video ended");
+            if(video_index < video_list.length - 1){
+                video_index++;
+            }
+            else{
+                video_index = 0;
+            }
+            video_player.setAttribute("src", video_list[video_index]);
+	    video_player.load();
+            video_player.play();
+        }
+    </script>
+</body>
+</html>

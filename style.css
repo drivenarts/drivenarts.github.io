@@ -84,13 +84,29 @@ a, #btnGames label {
 #nav a, #btnGames label {
 	text-decoration: none;
 }
-p, h1, h2, h3 {
+p, h1, h2, h3, li {
 	color: #d2d0cb;
 }
 h2 {
 	font-size: 30px;
 	font-weight: 900;
 	margin-bottom: 30px;
+}
+h3 {
+	font-size: 20px;
+	font-weight: 900;
+	margin-top: 30px;
+	margin-bottom: 10px;
+}
+.careers li {
+	font-size: 15px;
+	margin-top: 10px;
+	line-height: 1.5;
+}
+.careers ul {
+    list-style-type: disc; /* or 'circle' or 'square', depending on your preference */
+    padding-left: 20px; /* This adds some space inside the list, which is where the browser places bullets */
+    margin-left: 0; /* Adjust if needed */
 }
 p {
 	line-height: 2em;
@@ -351,12 +367,15 @@ footer .logo {
 	text-align: center;
 }
 
-
-
+#splash-careers {
+	height: 100px;
+	width: 100%;
+	background-size: cover;
+	margin-bottom: 50px;
+}
 #splash {
 	height: 300px;
 	width: 100%;
-	background:url('img/about.png') no-repeat center;
 	background-size: cover;
 	margin-bottom: 50px;
 }
@@ -780,4 +799,13 @@ input[type=email]:focus {
 	#overlay #line {
 		display: none;
 	}
+}
+body.home-page {
+    margin: 0;
+    padding: 0;
+    /* Adjust the path to where your image is stored relative to this CSS file */
+    background-image: url('img/background.jpg'); 
+    background-size: cover; /* Cover the whole page */
+    background-position: center; /* Center the background image */
+    height: 100vh; /* Make sure the body takes at least the full height of the viewport */
 }

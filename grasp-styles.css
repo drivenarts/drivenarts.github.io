@@ -309,17 +309,18 @@ h3 {
 
     .showcase-container {
         margin: 1rem auto;
-        gap: 0.5rem;
+        gap: 0.25rem;
     }
 
     .showcase-main {
-        width: 85%; /* Take up more width on mobile but leave room for arrows */
+        width: 90%;
     }
 
     .gallery-nav {
-        width: 32px; /* Slightly smaller nav buttons on mobile */
-        height: 32px;
-        margin: 0 0.25rem;
+        width: 28px;
+        height: 28px;
+        margin: 0 0.15rem;
+        font-size: 0.8rem;
     }
 
     .image-caption {
@@ -331,7 +332,12 @@ h3 {
 /* For even smaller screens */
 @media (max-width: 480px) {
     .showcase-main {
-        width: 75%; /* Even smaller for very small screens */
+        width: 85%;
+    }
+
+    .gallery-nav {
+        width: 24px;
+        height: 24px;
     }
 }
 

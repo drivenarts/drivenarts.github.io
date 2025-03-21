@@ -83,4 +83,43 @@ document.addEventListener('DOMContentLoaded', function() {
             popup.classList.add('active');
         });
     });
+
+    // Add this to your existing DOMContentLoaded event listener
+    const mainImage = document.getElementById('mainImage');
+    const prevButton = document.querySelector('.gallery-nav.prev');
+    const nextButton = document.querySelector('.gallery-nav.next');
+
+    // Array of all image paths
+    const imagePaths = [
+        'images/front-counter.png',
+        'images/HighresScreenshot00005.png',
+        'images/HighresScreenshot00006.png',
+        'images/HighresScreenshot00007.png',
+        'images/HighresScreenshot00008.png',
+        'images/HighresScreenshot00009.png',
+        'images/HighresScreenshot00010.png',
+        'images/HighresScreenshot00011.png',
+        'images/HighresScreenshot00012.png',
+        'images/HighresScreenshot00013.png',
+        'images/HighresScreenshot00014.png',
+        'images/HighresScreenshot00015.png',
+        'images/HighresScreenshot00016.png'
+    ];
+
+    let currentIndex = 0;
+
+    function updateImage(index) {
+        mainImage.src = imagePaths[index];
+        currentIndex = index;
+    }
+
+    prevButton.addEventListener('click', () => {
+        const newIndex = currentIndex === 0 ? imagePaths.length - 1 : currentIndex - 1;
+        updateImage(newIndex);
+    });
+
+    nextButton.addEventListener('click', () => {
+        const newIndex = currentIndex === imagePaths.length - 1 ? 0 : currentIndex + 1;
+        updateImage(newIndex);
+    });
 }); 

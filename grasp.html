@@ -1,345 +1,415 @@
 <!DOCTYPE html>
-<html data-wf-page="67b555c46d6ad7c9f88f46eb" 
-      data-wf-site="67b555c46d6ad7c9f88f46e5" 
-      lang="en">
+<html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <script>
-    // Run mobile detection ASAP
-    const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    if (isMobile) {
-      // Overwrite the page with a brief message
-      document.write("<h1>This is a hero page presentation for Epic Mega Grants and is not available on mobile devices.</h1>");
-      document.close(); 
-      // The .close() call immediately stops the browser from parsing
-      // anything else in this document, so no large assets get downloaded.
-    }
-  </script>
-  <title>Grasp - VR training for fast food restaurants.</title>
-  <meta content="Grasp - VR training for fast food restaurants." property="og:title"/>
-  <meta content="./images/Business%20SEO.jpg" property="og:image"/>
-  <meta content="Grasp - VR training for fast food restaurants." property="twitter:title"/>
-  <meta content="./images/Business%20SEO.jpg" property="twitter:image"/>
-  <meta content="width=device-width, initial-scale=1" name="viewport"/>
-
-  <!-- Link to your main CSS -->
-  <link href="./css/grasp-style.css" rel="stylesheet" type="text/css"/>
-
-  <!-- Webflow / Google Fonts -->
-  <link href="https://fonts.googleapis.com" rel="preconnect"/>
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous"/>
-  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
-  <script type="text/javascript">
-    WebFont.load({
-      google: {
-        families: [
-          "Montserrat:100,100italic,200,200italic,300,300italic,400,400italic,"
-          + "500,500italic,600,600italic,700,700italic,800,800italic,900,900italic"
-        ]
-      }
-    });
-  </script>
-  <script type="text/javascript">
-    !function(o,c){
-      var n=c.documentElement,t=" w-mod-";
-      n.className+=t+"js",
-      ("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)
-        &&(n.className+=t+"touch")
-    }(window,document);
-  </script>
-
-  <link href="./images/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
-  <link href="./images/webclip.png" rel="apple-touch-icon"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GRASP SDK - Unreal Engine Robotics Development</title>
+    <link rel="stylesheet" href="grasp-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-
-<body class="body">
-  
-  <!-- LOADING OVERLAY (initially visible) -->
-  <div id="loading-overlay">
-    <!-- "lds-grid" spinner -->
-    <div class="lds-grid">
-      <div></div><div></div><div></div>
-      <div></div><div></div><div></div>
-      <div></div><div></div><div></div>
-    </div>
-    <div class="label cc-light-loading">Loading</div>
-  </div>
-
-  <!-- NAVIGATION -->
-  <div data-collapse="medium" data-animation="default" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navigation w-nav">
-    <div class="navigation-wrap">
-      <a href="/grasp.html" aria-current="page" class="logo-link w-nav-brand w--current" aria-label="home">
-        <div><strong class="bold-text">GRASP</strong></div>
-        <div class="text-block-2">MegaGrant Application - VR training for fast food restaurants.</div>
-      </a>
-      <div class="menu">
-        <div class="menu-button w-nav-button">
-          <img src="./images/menu-icon.png" width="22" alt="" class="menu-icon"/>
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            <h1>GRASP SDK</h1>
         </div>
-      </div>
+        <nav>
+            <ul>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#getting-started">Getting Started</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#blueprint-nodes">Blueprint Nodes</a></li>
+                <li><a href="#cpp-api">C++ API</a></li>
+                <li><a href="#examples">Examples</a></li>
+                <li><a href="#roadmap">Roadmap</a></li>
+            </ul>
+        </nav>
     </div>
-  </div>
 
-  <!-- HERO / INTRO SECTION -->
-  <div class="section cc-store-home-wrap">
-    <div class="intro-header">
-      <div class="intro-content cc-homepage">
-        <div class="intro-text">
-          <div class="heading-jumbo">Learning is doing.</div>
-          <div class="paragraph-bigger cc-bigger-white-light">
-            Hands on training in a risk free environment.
-            <br/>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+    <main class="content">
+        <section id="overview" class="section">
+            <h2>Overview</h2>
+            <p>GRASP SDK is a powerful Unreal Engine plugin that enables developers to program and control humanoid robots using familiar Unreal Engine tools and workflows. Built on the foundation of VR training experiences, GRASP brings the power of game development to robotics.</p>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <i class="fas fa-cube"></i>
+                    <h3>Environment First</h3>
+                    <p>Define your space and equipment properties, letting the robot discover and adapt to its environment naturally.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-tasks"></i>
+                    <h3>High-Level Tasks</h3>
+                    <p>Focus on what needs to be done using familiar Unreal tools, while the SDK handles the complexities of robot execution.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-code"></i>
+                    <h3>Familiar Tools</h3>
+                    <p>Use Blueprints and C++ with the same workflows you know, making robot programming as intuitive as game development.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-robot"></i>
+                    <h3>Robot Integration</h3>
+                    <p>Seamlessly integrate with leading robot platforms while focusing on business logic rather than low-level control.</p>
+                </div>
+            </div>
+        </section>
 
-  <div class="spacer1">
-    <div class="div-block-6">
-      <div class="label cc-light">
-        Imagine its your first day of work at Dunkin Donuts tomorrow.
-      </div>
-    </div>
-  </div>
+        <section id="getting-started" class="section">
+            <h2>Getting Started</h2>
+            <div class="code-block">
+                <h3>Installation</h3>
+                <pre><code>1. Download GRASP SDK from the <a href="#" class="marketplace-link">Unreal Marketplace</a>
+2. Enable the plugin in your project settings
+3. Add the following to your project's Build.cs:
+   PublicDependencyModuleNames.AddRange(new string[] { "GRASP" });</code></pre>
+            </div>
+            <div id="mega-grant-popup" class="popup">
+                <div class="popup-content">
+                    <h3>Coming Soon!</h3>
+                    <p>The SDK is currently under development but will be coming to the fab.com marketplace soon.</p>
+                    <button class="popup-close">Got it!</button>
+                </div>
+            </div>
+            <div class="getting-started-grid">
+                <div class="getting-started-card">
+                    <i class="fas fa-cube"></i>
+                    <h3>1. Define Your Environment</h3>
+                    <p>Set up your environment by defining equipment properties and interaction zones. No complex configuration needed - just tell the SDK what's in your space.</p>
+                </div>
+                <div class="getting-started-card">
+                    <i class="fas fa-tasks"></i>
+                    <h3>2. Create Your Tasks</h3>
+                    <p>Define your service flows using simple Blueprint nodes or C++ functions. Focus on what needs to be done, not how the robot does it.</p>
+                </div>
+                <div class="getting-started-card">
+                    <i class="fas fa-play"></i>
+                    <h3>3. Run and Monitor</h3>
+                    <p>Start your service robot and watch it execute tasks. Use built-in visualization tools to monitor performance and debug issues.</p>
+                </div>
+            </div>
+        </section>
 
-  <div class="spacer1">
-    <div class="div-block-6">
-      <div class="label cc-light">
-        Would you rather login to a learning platform to read text and video to learn the job?
-      </div>
-    </div>
-  </div>
+        <section id="features" class="section">
+            <h2>Key Features</h2>
+            <ul class="feature-list">
+                <li>
+                    <h3>Environment Management</h3>
+                    <ul>
+                        <li>Dynamic equipment discovery and registration</li>
+                        <li>Property-based interaction zones</li>
+                        <li>Runtime environment adaptation</li>
+                        <li>Multi-equipment coordination</li>
+                    </ul>
+                </li>
+                <li>
+                    <h3>Task Framework</h3>
+                    <ul>
+                        <li>Business logic focused programming</li>
+                        <li>Natural task sequencing</li>
+                        <li>Priority-based task management</li>
+                        <li>Adaptive task execution</li>
+                    </ul>
+                </li>
+                <li>
+                    <h3>Developer Experience</h3>
+                    <ul>
+                        <li>Visual task programming</li>
+                        <li>Real-time environment visualization</li>
+                        <li>Intuitive debugging tools</li>
+                        <li>Comprehensive documentation</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
 
-  <div class="spacer1">
-    <div class="div-block-6">
-      <div class="label cc-light">
-        Or would you prefer to be taken by the hand..
-      </div>
-    </div>
-  </div>
+        <section id="blueprint-nodes" class="section">
+            <h2>Blueprint Nodes</h2>
+            <div class="node-examples">
+                <div class="node-card">
+                    <h3>Environment Nodes</h3>
+                    <ul>
+                        <li>Register Equipment</li>
+                        <li>Define Interaction Zone</li>
+                        <li>Set Environment Properties</li>
+                        <li>Update Equipment State</li>
+                    </ul>
+                </div>
+                <div class="node-card">
+                    <h3>Task Nodes</h3>
+                    <ul>
+                        <li>Define Service Flow</li>
+                        <li>Set Task Priority</li>
+                        <li>Monitor Task Progress</li>
+                        <li>Handle Task Completion</li>
+                    </ul>
+                </div>
+                <div class="node-card">
+                    <h3>Business Logic Nodes</h3>
+                    <ul>
+                        <li>Process Customer Order</li>
+                        <li>Manage Service Queue</li>
+                        <li>Handle Customer Interaction</li>
+                        <li>Track Service Metrics</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
-  <!-- LOTTIE SECTIONS (Webflow-driven) -->
-  <section data-w-id="260966e8-3dcd-84fc-f4d5-9d2cfb8dd263" class="lottie-section0">
-    <div data-w-id="260966e8-3dcd-84fc-f4d5-9d2cfb8dd265"
-         data-is-ix2-target="1"
-         class="lottie-animation-0"
-         data-animation-type="lottie"
-         data-src="./lotties/0store.mp4.lottie.json"
-         data-loop="0"
-         data-direction="1"
-         data-autoplay="0"
-         data-renderer="canvas"
-         data-default-duration="0"
-         data-duration="15">
-    </div>
-  </section>
+        <section id="cpp-api" class="section">
+            <h2>C++ API</h2>
+            <div class="code-block">
+                <h3>High-Level Task Orchestration</h3>
+                <pre><code>#include "GRASP.h"
 
-  <div class="spacer2">
-    <div class="div-block-7">
-      <div class="label cc-light">Introduced to every piece of equipment</div>
-    </div>
-  </div>
+// Define the restaurant environment and equipment
+class ARestaurantEnvironment : public AActor
+{
+    GENERATED_BODY()
 
-  <section data-w-id="966e3e1d-d8f3-08df-b1b7-7be9985591fc" class="lottie-section1">
-    <div data-w-id="853406bf-245d-6179-2114-24d7d29abb7e"
-         data-is-ix2-target="1"
-         class="lottie-animation-1"
-         data-animation-type="lottie"
-         data-src="./lotties/1counter.mp4.lottie.json"
-         data-loop="0"
-         data-direction="1"
-         data-autoplay="0"
-         data-renderer="canvas"
-         data-default-duration="0"
-         data-duration="0">
-    </div>
-  </section>
-
-  <section data-w-id="1bc0b8f7-2d4b-d104-50b1-69f3e30b1e87" class="lottie-section1b">
-    <div data-is-ix2-target="1"
-         class="lottie-animation-7"
-         data-w-id="d19eb3f3-fd40-ac8e-11cd-9537edd9ef46"
-         data-animation-type="lottie"
-         data-src="./lotties/7equipmentcloseup.mp4.lottie.json"
-         data-loop="0"
-         data-direction="1"
-         data-autoplay="0"
-         data-renderer="canvas"
-         data-default-duration="0"
-         data-duration="0">
-    </div>
-  </section>
-
-  <div class="spacer3">
-    <div class="div-block-8">
-      <div class="label cc-light">Experience every step of the job.</div>
-    </div>
-  </div>
-
-  <section data-w-id="08796cbb-3801-8f31-4893-5c7b675d6584" class="lottie-section2">
-    <div data-is-ix2-target="1"
-         class="lottie-animation-2"
-         data-w-id="66659ac8-d4b4-1818-6660-bff367cb6ccf"
-         data-animation-type="lottie"
-         data-src="./lotties/2backcounter.mp4.lottie.json"
-         data-loop="0"
-         data-direction="1"
-         data-autoplay="0"
-         data-renderer="canvas"
-         data-default-duration="0"
-         data-duration="0">
-    </div>
-  </section>
-
-  <section data-w-id="0f5eabb0-2f1e-9af2-1e16-48775ab81db9" class="lottie-section3">
-    <div data-is-ix2-target="1"
-         class="lottie-animation-3"
-         data-w-id="0e922943-62a7-9bcf-e2ba-0de7d43667f1"
-         data-animation-type="lottie"
-         data-src="./lotties/3sandwich.mp4.lottie.json"
-         data-loop="0"
-         data-direction="1"
-         data-autoplay="0"
-         data-renderer="canvas"
-         data-default-duration="0"
-         data-duration="0">
-    </div>
-  </section>
-
-  <section data-w-id="07fb5f8c-b8ae-606e-dcca-22d0dfd226ce" class="lottie-section4">
-    <div data-is-ix2-target="1"
-         class="lottie-animation-4"
-         data-w-id="6023a7ac-d281-ff8e-cef0-21b4692c81c0"
-         data-animation-type="lottie"
-         data-src="./lotties/4donutprep.mp4.lottie.json"
-         data-loop="0"
-         data-direction="1"
-         data-autoplay="0"
-         data-renderer="canvas"
-         data-default-duration="0"
-         data-duration="0">
-    </div>
-  </section>
-
-  <section data-w-id="a653dd2b-c6a7-b8b4-5e34-e284d1b41af0" class="lottie-section5">
-    <div data-is-ix2-target="1"
-         class="lottie-animation-5"
-         data-w-id="7027aff3-985a-7328-5b83-c91ba14251c3"
-         data-animation-type="lottie"
-         data-src="./lotties/5freezer.mp4.lottie.json"
-         data-loop="0"
-         data-direction="1"
-         data-autoplay="0"
-         data-renderer="canvas"
-         data-default-duration="0"
-         data-duration="0">
-    </div>
-  </section>
-
-  <div class="spacer4">
-    <div class="div-block-9">
-      <div class="label cc-light">Before you even show up.</div>
-    </div>
-  </div>
-
-  <section data-w-id="a36c3b87-3a16-a44b-c749-eb2a5edfd0fd" class="lottiesection6">
-    <div data-is-ix2-target="1"
-         class="lottie-animation-6"
-         data-w-id="4263a43b-ab49-9c36-4cb5-0ad8277496df"
-         data-animation-type="lottie"
-         data-src="./lotties/9storepanfadetowhite.mp4.lottie.json"
-         data-loop="0"
-         data-direction="1"
-         data-autoplay="0"
-         data-renderer="canvas"
-         data-default-duration="0"
-         data-duration="0">
-    </div>
-  </section>
-
-  <div class="spacer5">
-    <div class="div-block-10">
-      <div class="label cc-light">
-        we think the world is a better place,<br/><br/>
-        when its powered by unreal engine.
-      </div>
-    </div>
-  </div>
-
-  <div class="spacer6">
-    <div class="div-block-11">
-      <div class="label-no-padding cc-light">
-        We hope Epic Mega Grants does too.<br/><br/><br/>‍<br/><br/>Thank you,
-      </div>
-      <img src="./images/logo_drivenarts.png" loading="lazy" alt="" class="image-2"/>
-    </div>
-  </div>
-
-  <div class="div-block-14">
-    <div style="padding-top:56.17021276595745%" class="w-embed-youtubevideo youtube-2">
-      <iframe 
-        src="https://www.youtube-nocookie.com/embed/IVB_cP27Hss?rel=0&amp;controls=0&amp;autoplay=0&amp;mute=0&amp;start=0" 
-        frameBorder="0" 
-        style="position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:auto" 
-        allow="autoplay; encrypted-media" 
-        allowfullscreen="" 
-        title="Grasp">
-      </iframe>
-    </div>
-  </div>
-
-  <!-- SCRIPT: Pre-Fetch Lottie JSON & enforce a minimum overlay time & no scroll  -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      // 1) Add "loading" class to BODY => no scroll
-      document.body.classList.add("loading");
-
-      // List all Lottie JSON paths
-      const lottiePaths = [
-        "./lotties/0store.mp4.lottie.json",
-        "./lotties/1counter.mp4.lottie.json",
-        "./lotties/2backcounter.mp4.lottie.json",
-        "./lotties/3sandwich.mp4.lottie.json",
-        "./lotties/4donutprep.mp4.lottie.json",
-        "./lotties/5freezer.mp4.lottie.json",
-        "./lotties/7equipmentcloseup.mp4.lottie.json",
-        "./lotties/9storepanfadetowhite.mp4.lottie.json"
-      ];
-
-      // Fetch all JSON in parallel
-      const prefetchPromise = Promise.all(
-        lottiePaths.map(path => fetch(path).then(resp => resp.json()))
-      );
-
-      // Minimum spinner time (2s)
-      const MINIMUM_SPINNER_TIME = 2000;
-      const minimumWaitPromise = new Promise(resolve =>
-        setTimeout(resolve, MINIMUM_SPINNER_TIME)
-      );
-
-      // Wait for both: Lottie downloads + min time
-      Promise.all([prefetchPromise, minimumWaitPromise])
-        .then(() => hideOverlay())
-        .catch(err => {
-          console.error("Error pre-fetching Lotties:", err);
-          hideOverlay(); // still hide overlay on error
+public:
+    // Initialize the environment with known equipment properties
+    virtual void BeginPlay() override
+    {
+        // Register equipment properties that the robot needs to know about
+        RegisterEquipment("POS_System", {
+            Dimensions: FVector(60.0f, 30.0f, 90.0f),  // Width, Depth, Height in cm
+            InteractionPoint: FVector(30.0f, 0.0f, 45.0f),  // Relative to equipment center
+            RequiredClearance: 100.0f,  // Minimum distance needed for operation
+            InteractionHeight: 90.0f,   // Height of the touch screen
+            MaxReachDistance: 80.0f     // Maximum distance for interaction
         });
+        
+        RegisterEquipment("Coffee_Maker", {
+            Dimensions: FVector(40.0f, 50.0f, 75.0f),
+            InteractionPoint: FVector(20.0f, 25.0f, 60.0f),
+            RequiredClearance: 80.0f,
+            CupPlacementHeight: 65.0f,  // Height where cups should be placed
+            MaxReachDistance: 70.0f
+        });
+        
+        RegisterEquipment("Donut_Case", {
+            Dimensions: FVector(120.0f, 40.0f, 100.0f),
+            InteractionPoint: FVector(60.0f, 20.0f, 50.0f),
+            RequiredClearance: 90.0f,
+            ShelfHeights: {40.0f, 60.0f, 80.0f},  // Heights of each shelf
+            MaxReachDistance: 85.0f
+        });
+    }
 
-      function hideOverlay() {
-        // Remove overlay
-        const overlay = document.getElementById("loading-overlay");
-        if (overlay) {
-          overlay.style.display = "none";
+private:
+    // Map of equipment properties (excluding location)
+    TMap<FString, FEquipmentProperties> EquipmentProperties;
+};
+
+// Main robot controller class
+class AServiceRobot : public AActor
+{
+    GENERATED_BODY()
+
+public:
+    // High-level service loop
+    void ServiceLoop()
+    {
+        while (IsOperating)
+        {
+            // Check for customers at counter
+            if (IsCustomerWaiting())
+            {
+                // Handle the customer interaction
+                HandleCustomerInteraction();
+            }
+            
+            // Check for pending orders
+            if (HasPendingOrders())
+            {
+                // Process the next order
+                ProcessNextOrder();
+            }
         }
-        // Re-enable scrolling
-        document.body.classList.remove("loading");
-      }
-    });
-  </script>
+    }
 
-  <!-- Webflow / jQuery scripts -->
-  <script src="./js/jquery.js" type="text/javascript" crossorigin="anonymous"></script>
-  <script src="./js/grasp-script.js" type="text/javascript"></script>
+private:
+    // Customer interaction flow
+    void HandleCustomerInteraction()
+    {
+        // Navigate to POS system
+        NavigateToEquipment("POS_System");
+        
+        // Greet customer and get order
+        FOrder NewOrder = GetCustomerOrder();
+        
+        // Process payment
+        if (ProcessPayment(NewOrder))
+        {
+            // Add order to queue
+            AddOrderToQueue(NewOrder);
+        }
+    }
+
+    // Order fulfillment flow
+    void ProcessNextOrder()
+    {
+        FOrder CurrentOrder = GetNextOrder();
+        
+        // Navigate to required equipment
+        for (const FString& Equipment : CurrentOrder.RequiredEquipment)
+        {
+            NavigateToEquipment(Equipment);
+            
+            // Perform the required action
+            if (Equipment == "Coffee_Maker")
+            {
+                PrepareBeverage(CurrentOrder.BeverageType);
+            }
+            else if (Equipment == "Donut_Case")
+            {
+                RetrieveDonuts(CurrentOrder.DonutTypes);
+            }
+        }
+        
+        // Deliver order to customer
+        DeliverOrder(CurrentOrder);
+    }
+
+    // Navigation helper
+    void NavigateToEquipment(const FString& EquipmentName)
+    {
+        // The actual navigation is handled by the SDK
+        // This is just a high-level interface
+        FVector TargetLocation = GetEquipmentLocation(EquipmentName);
+        NavigateToLocation(TargetLocation);
+    }
+};
+
+// Example usage in game mode
+class ARestaurantGameMode : public AGameModeBase
+{
+    GENERATED_BODY()
+
+public:
+    virtual void BeginPlay() override
+    {
+        // Spawn the environment
+        Environment = GetWorld()->SpawnActor<ARestaurantEnvironment>();
+        
+        // Spawn and initialize the robot
+        Robot = GetWorld()->SpawnActor<AServiceRobot>();
+        Robot->Initialize(Environment);
+        
+        // Start the service loop
+        Robot->ServiceLoop();
+    }
+
+private:
+    UPROPERTY()
+    ARestaurantEnvironment* Environment;
+    
+    UPROPERTY()
+    AServiceRobot* Robot;
+};</code></pre>
+            </div>
+            <div class="code-explanation">
+                <h3>Key Concepts</h3>
+                <ul>
+                    <li><strong>Environment Registration:</strong> The robot maintains awareness of its environment by registering equipment properties that can be discovered at runtime.</li>
+                    <li><strong>High-Level Task Flow:</strong> Developers focus on business logic (customer service, order processing) rather than low-level robot control.</li>
+                    <li><strong>Modular Design:</strong> Complex behaviors are broken down into manageable, reusable functions.</li>
+                    <li><strong>Event-Driven Architecture:</strong> The service loop continuously checks for new tasks and customer interactions.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="examples" class="section">
+            <h2>Examples</h2>
+            <div class="example-grid">
+                <div class="example-card">
+                    <h3>Environment Setup</h3>
+                    <p>Define your restaurant layout, equipment properties, and interaction zones. Let the robot discover and adapt to its environment.</p>
+                    <a href="#" class="button">View Example</a>
+                </div>
+                <div class="example-card">
+                    <h3>Customer Service Flow</h3>
+                    <p>Create natural customer interaction patterns, order processing, and service delivery logic without worrying about robot mechanics.</p>
+                    <a href="#" class="button">View Example</a>
+                </div>
+                <div class="example-card">
+                    <h3>Dynamic Task Management</h3>
+                    <p>Define business rules, priorities, and workflows while the SDK handles the complexities of robot execution.</p>
+                    <a href="#" class="button">View Example</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="roadmap" class="section">
+            <h2>Roadmap</h2>
+            <div class="roadmap-timeline">
+                <div class="timeline-item">
+                    <h3>Phase 1</h3>
+                    <ul>
+                        <li>Core SDK Foundation</li>
+                        <ul>
+                            <li>Environment property system</li>
+                            <li>Basic task abstraction layer</li>
+                            <li>Initial robot manufacturer integration</li>
+                        </ul>
+                        <li>Developer Experience</li>
+                        <ul>
+                            <li>Unreal Engine plugin architecture</li>
+                            <li>Blueprint node system</li>
+                            <li>Basic documentation and examples</li>
+                        </ul>
+                        <li>Project Milestones</li>
+                        <ul>
+                            <li>Epic Mega Grant funding</li>
+                            <li>Initial SDK prototype</li>
+                        </ul>
+                    </ul>
+                </div>
+                <div class="timeline-item">
+                    <h3>Phase 2</h3>
+                    <ul>
+                        <li>Advanced Features</li>
+                        <ul>
+                            <li>Equipment interaction framework</li>
+                            <li>Task-to-motion translation system</li>
+                            <li>Multi-robot coordination</li>
+                            <li>Dynamic environment adaptation</li>
+                        </ul>
+                        <li>Developer Tools</li>
+                        <ul>
+                            <li>Visual task editor in Unreal</li>
+                            <li>Real-time robot state visualization</li>
+                            <li>Task simulation and validation</li>
+                        </ul>
+                        <li>Industry Partnerships</li>
+                        <ul>
+                            <li>Additional robot manufacturer support</li>
+                            <li>Industry-specific task libraries</li>
+                            <li>Enterprise deployment tools</li>
+                        </ul>
+                    </ul>
+                </div>
+                <div class="timeline-item">
+                    <h3>Phase 3</h3>
+                    <ul>
+                        <li>Ecosystem Growth</li>
+                        <ul>
+                            <li>Community-driven development</li>
+                            <li>Open source contributions</li>
+                            <li>Developer marketplace</li>
+                        </ul>
+                        <li>Industry Standards</li>
+                        <ul>
+                            <li>Task definition standards</li>
+                            <li>Robot interface protocols</li>
+                        </ul>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://kit.fontawesome.com/your-font-awesome-kit.js"></script>
+    <script src="js/grasp-script.js"></script>
 </body>
-</html>
+</html> 

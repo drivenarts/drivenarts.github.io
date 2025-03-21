@@ -306,6 +306,33 @@ h3 {
     body {
         flex-direction: column;
     }
+
+    .showcase-container {
+        margin: 1rem auto;
+        gap: 0.5rem;
+    }
+
+    .showcase-main {
+        width: 85%; /* Take up more width on mobile but leave room for arrows */
+    }
+
+    .gallery-nav {
+        width: 32px; /* Slightly smaller nav buttons on mobile */
+        height: 32px;
+        margin: 0 0.25rem;
+    }
+
+    .image-caption {
+        padding: 0.25rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* For even smaller screens */
+@media (max-width: 480px) {
+    .showcase-main {
+        width: 75%; /* Even smaller for very small screens */
+    }
 }
 
 .getting-started-grid {

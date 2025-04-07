@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Add this to your existing DOMContentLoaded event listener
+    // Gallery functionality
     const mainImage = document.getElementById('mainImage');
     const prevButton = document.querySelector('.gallery-nav.prev');
     const nextButton = document.querySelector('.gallery-nav.next');
@@ -114,9 +114,23 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
 
     let currentIndex = 0;
+    const preloadedImages = {};
+
+    // Preload all images
+    function preloadImages() {
+        imagePaths.forEach(path => {
+            const img = new Image();
+            img.src = path;
+            preloadedImages[path] = img;
+        });
+    }
+
+    // Start preloading images immediately
+    preloadImages();
 
     function updateImage(index) {
-        mainImage.src = imagePaths[index];
+        const newImagePath = imagePaths[index];
+        mainImage.src = newImagePath;
         currentIndex = index;
     }
 

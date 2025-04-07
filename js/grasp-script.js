@@ -115,23 +115,72 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let currentIndex = 0;
     const preloadedImages = {};
+    let preloadStarted = false;
 
-    // Preload all images
+    // Preload images in batches
     function preloadImages() {
-        imagePaths.forEach(path => {
+        if (preloadStarted) return;
+        preloadStarted = true;
+        
+        // First, preload the next and previous images
+        const nextIndex = (currentIndex + 1) % imagePaths.length;
+        const prevIndex = (currentIndex - 1 + imagePaths.length) % imagePaths.length;
+        
+        preloadImage(imagePaths[nextIndex]);
+        preloadImage(imagePaths[prevIndex]);
+        
+        // Then start preloading the rest in batches
+        let batchSize = 3;
+        let currentBatch = 0;
+        
+        function preloadNextBatch() {
+            const startIdx = (currentBatch * batchSize) % imagePaths.length;
+            let count = 0;
+            
+            for (let i = 0; i < batchSize && count < imagePaths.length; i++) {
+                const idx = (startIdx + i) % imagePaths.length;
+                if (!preloadedImages[imagePaths[idx]]) {
+                    preloadImage(imagePaths[idx]);
+                    count++;
+                }
+            }
+            
+            currentBatch++;
+            
+            // Continue with next batch if there are more images to preload
+            if (count > 0) {
+                setTimeout(preloadNextBatch, 100);
+            }
+        }
+        
+        // Start the batch preloading after a short delay
+        setTimeout(preloadNextBatch, 500);
+    }
+    
+    // Preload a single image
+    function preloadImage(path) {
+        if (!preloadedImages[path]) {
             const img = new Image();
             img.src = path;
             preloadedImages[path] = img;
-        });
+        }
     }
 
-    // Start preloading images immediately
-    preloadImages();
+    // Start preloading after the page has fully loaded
+    window.addEventListener('load', function() {
+        // Wait a bit after the page load to start preloading
+        setTimeout(preloadImages, 1000);
+    });
 
     function updateImage(index) {
         const newImagePath = imagePaths[index];
         mainImage.src = newImagePath;
         currentIndex = index;
+        
+        // Start preloading if not already started
+        if (!preloadStarted) {
+            preloadImages();
+        }
     }
 
     prevButton.addEventListener('click', () => {

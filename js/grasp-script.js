@@ -92,6 +92,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // Array of all image paths
     const imagePaths = [
         'images/front-counter.png',
+        'images/PointOfSales.png',
+        'images/PickupCup.png',
+        'images/PlaceCupUnderSpout.png',
+        'images/PourCoffee.png',
+        'images/AddLid.png',
+        'images/ServeCoffee.png',
+        'images/Wave.png',
         'images/HighresScreenshot00005.png',
         'images/HighresScreenshot00006.png',
         'images/HighresScreenshot00007.png',

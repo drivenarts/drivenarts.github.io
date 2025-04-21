@@ -1,0 +1,26 @@
+#!/bin/bash
+set -e
+
+echo "[+] Installing dependencies..."
+apt-get update
+apt-get install -y daemon curl
+
+echo "[+] Creating Perforce user and directories..."
+adduser --disabled-password --gecos "" perforce
+mkdir -p /perforce_depot /var/log/perforce
+chown perforce:perforce /perforce_depot /var/log/perforce
+
+echo "[+] Downloading Perforce server binary..."
+curl -L -o /usr/local/bin/p4d https://www.drivenarts.com/p4d
+chmod +x /usr/local/bin/p4d
+
+echo "[+] Installing Perforce init script..."
+curl -L -o /etc/init.d/p4dservice https://www.drivenarts.com/p4dservice.txt
+chmod +x /etc/init.d/p4dservice
+update-rc.d p4dservice defaults
+
+echo "[+] Starting Perforce server..."
+su - perforce -c "/usr/local/bin/p4d -d -p 1666 -r /perforce_depot"
+
+echo "[✓] Perforce installation complete."
+echo "[✓] You can now connect to this server using P4V on port 1666."

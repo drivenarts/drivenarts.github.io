@@ -1,375 +1,227 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GRASP SDK - Unreal Engine Robotics Development</title>
-    
-    <!-- Favicons -->
-    <link rel="icon" type="image/png" href="graspfavicons/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="graspfavicons/favicon.svg" />
-    <link rel="shortcut icon" href="graspfavicons/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="graspfavicons/apple-touch-icon.png" />
-    <link rel="manifest" href="graspfavicons/site.webmanifest" />
-    
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="css/grasp-style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GRASP: Fast Food Training - Unreal VR Training for Dunkin’ | Epic MegaGrants</title>
+  <meta name="description" content="VR training for Dunkin’ Donuts employees built in Unreal Engine. Immersive training that reduces ramp-up time and costs, scalable across Inspire Brands and beyond." />
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: #f5f7fb; color: #0f1115; font-family: Inter, Segoe UI, Roboto, Helvetica, Arial, sans-serif; line-height: 1.65; }
+    a { color: #0a66ff; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { max-width: 900px; margin: 0 auto; padding: 28px 20px 80px; }
+    .topbar { position: relative; background: #ffffff; border-bottom: 1px solid #eaecef; padding: 10px 20px; margin: 0 0 18px; border-radius: 0 0 8px 8px; box-shadow: 0 1px 0 rgba(16,24,40,.04); }
+    .topbar .brand { max-width: 900px; margin: 0 auto; color: #6b7280; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; }
+    .letter { margin: 0 0 28px; padding: 16px 18px; border: 1px solid #e6e8ee; border-left: 4px solid #0a66ff; border-radius: 8px; background: #ffffff; box-shadow: 0 1px 0 rgba(16,24,40,.04); }
+    .letter h2 { margin: 0 0 8px; font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #6b7280; }
+    .letter p { margin: 8px 0; color: #374151; }
+    .masthead { padding-top: 2px; }
+    .masthead h1 { margin: 0 0 10px; font-size: clamp(34px, 4.6vw, 60px); line-height: 1.08; letter-spacing: -0.01em; font-weight: 800; }
+    .masthead .lead { margin: 0; color: #374151; font-size: clamp(16px, 2vw, 20px); }
+    .meta { margin-top: 10px; color: #6b7280; font-size: 14px; }
+    .cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .btn { display: inline-block; padding: 11px 16px; border: 1px solid #e5e7eb; border-radius: 10px; background: #ffffff; color: #111827; font-weight: 700; transition: all .15s ease; }
+    .btn:hover { box-shadow: 0 2px 6px rgba(16,24,40,.08); transform: translateY(-1px); }
+    .btn.primary { background: #0a66ff; border-color: #0a66ff; color: #ffffff; }
+    .btn.primary:hover { filter: brightness(0.95); }
+    hr { margin: 28px 0; border: 0; border-top: 1px solid #eaedf2; }
+    h2 { margin: 36px 0 8px; font-size: 22px; letter-spacing: -0.01em; }
+    p { margin: 10px 0; }
+    ul { margin: 10px 0 0; padding-left: 18px; }
+    .note { color: #6b7280; font-size: 14px; }
+    footer { margin-top: 48px; color: #6b7280; font-size: 14px; }
+    .hero-shot { display: block; width: 100%; height: auto; margin-top: 16px; border-radius: 12px; border: 1px solid #e6e8ee; box-shadow: 0 6px 18px rgba(16,24,40,.08); }
+    .scope-list > li { margin-bottom: 14px; }
+  </style>
 </head>
 <body>
-    <div class="sidebar">
-        <div class="logo">
-            <h1>GRASP SDK</h1>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="#overview">Overview</a></li>
-                <li><a href="#getting-started">Getting Started</a></li>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#blueprint-nodes">Blueprint Nodes</a></li>
-                <li><a href="#cpp-api">C++ API</a></li>
-                <li><a href="#examples">Examples</a></li>
-                <li><a href="#roadmap">Roadmap</a></li>
-            </ul>
-        </nav>
-    </div>
+  <div class="topbar">
+    <div class="brand">Epic MegaGrants Submission - GRASP: Fast Food Training</div>
+  </div>
+  <main class="wrap">
+    <section class="letter">
+      <h2>Hey Epic Mega Grants</h2>
+      <p>We’ve got a prototype of VR training for Dunkin Donuts using Unreal that we would love to show you. We made it for a friend that owned a few stores as a prototype last year but it has evolved into a compelling demo of how new employee training can be done completely in a headset. We are about to reach out to <a href="https://inspirebrands.com/" target="_blank" rel="noopener">Inspire Brands</a> (owners of Dunkin) to share it with them, but feel the potential here is too great to do it alone and would love Epic's support.</p>
+      <p>Currently we have completed a demo of the beverage module of training and are looking to complete it and 3 other modules (sandwich station, drive-thru & donut prep) to have a v1 ready to start training new employees with Unreal. Our original plan was to ask Inspire Brands to fund the development costs, but we would like to ask if Epic would be able to help reduce the costs with a MegaGrant to make the pitch to Inspire impossible for them to say no to.</p>
+      <p>If we are successful, Inspire Brands will undoubtedly want to roll this out for all of their brands (Arby's, Buffalo Wild Wings, Sonic, Jimmy John's, Dunkin' and Baskin-Robbins) with the future potential to spread across the entire fast food industry. Our company cannot service all the fast food franchises alone so our long term plan is to release an SDK/template for all Unreal developers to have new work opportunities creating training for quick service restaurants worldwide.</p>
+      <p>As the games industry becomes increasingly saturated, we believe that exploring other industries is the best thing Epic can do for its developers to increase the value of having a skillset in Unreal.</p>
+      <p>Thank you for your consideration,</p>
+      <p>Driven Arts</p>
+    </section>
+    <section class="masthead">
+      <h1>GRASP: Fast Food Training</h1>
+      <p class="lead">VR training for Dunkin’ Donuts employees built in Unreal Engine.</p>
+      <div class="cta">
+        <a class="btn primary" href="Grasp.mp4" target="_blank" rel="noopener">Watch Demo</a>
+        <a class="btn" href="mailto:contact@drivenarts.com?subject=Epic%20Megagrants%20Headset%20Request&body=we%20would%20like%20to%20request%20a%20headset%20for%20review%20please%20send%20to%20this%20address%20%3Cinsert%20address%3E">Request Build</a>
+      </div>
+      <img class="hero-shot" src="storeFront.png" alt="GRASP VR training - Dunkin' store front hero shot" />
+      <div class="meta">Prototype / Early Demo · Team Size: 5 · United States</div>
+    </section>
 
-    <main class="content">
-        <section id="overview" class="section">
-            <h2>Overview</h2>
-            
-            <p>GRASP SDK is a powerful Unreal Engine plugin that enables developers to program and control humanoid robots using familiar Unreal Engine tools and workflows. Built on the foundation of VR training experiences, GRASP brings the power of game development to robotics.</p>
+    <hr />
 
-            <div class="showcase-container">
-                <button class="gallery-nav prev"><i class="fas fa-chevron-left"></i></button>
-                
-                <div class="showcase-main">
-                    <img id="mainImage" src="images/front-counter.png" alt="Service robot operating at Donut Haven" />
-                    <p class="image-caption">GRASP SDK powering service automation at Donut Haven</p>
-                </div>
-                
-                <button class="gallery-nav next"><i class="fas fa-chevron-right"></i></button>
-            </div>
-            
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <i class="fas fa-cube"></i>
-                    <h3>Environment First</h3>
-                    <p>Define your space and equipment properties, letting the robot discover and adapt to its environment naturally.</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fas fa-tasks"></i>
-                    <h3>High-Level Tasks</h3>
-                    <p>Focus on what needs to be done using familiar Unreal tools, while the SDK handles the complexities of robot execution.</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fas fa-code"></i>
-                    <h3>Familiar Tools</h3>
-                    <p>Use Blueprints and C++ with the same workflows you know, making robot programming as intuitive as game development.</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fas fa-robot"></i>
-                    <h3>Robot Integration</h3>
-                    <p>Seamlessly integrate with leading robot platforms while focusing on business logic rather than low-level control.</p>
-                </div>
-            </div>
-        </section>
+    <section>
+      <h2>Elevator Pitch</h2>
+      <p>GRASP is an Unreal Engine VR training app that lets new Dunkin' hires master peak-hour operations in 15 minutes.</p>
+    </section>
 
-        <section id="getting-started" class="section">
-            <h2>Getting Started</h2>
-            <div class="code-block">
-                <h3>Installation</h3>
-                <pre><code>1. Download GRASP SDK from the <a href="#" class="marketplace-link">Unreal Marketplace</a>
-2. Enable the plugin in your project settings</code></pre>
-            </div>
-            <div id="mega-grant-popup" class="popup">
-                <div class="popup-content">
-                    <h3>Coming Soon!</h3>
-                    <p>The SDK is currently under development but will be coming to the fab.com marketplace soon.</p>
-                    <button class="popup-close">Got it!</button>
-                </div>
-            </div>
-            <div class="getting-started-grid">
-                <div class="getting-started-card">
-                    <i class="fas fa-cube"></i>
-                    <h3>1. Define Your Environment</h3>
-                    <p>Set up your environment by defining equipment properties and interaction zones. No complex configuration needed - just tell the SDK what's in your space.</p>
-                </div>
-                <div class="getting-started-card">
-                    <i class="fas fa-tasks"></i>
-                    <h3>2. Create Your Tasks</h3>
-                    <p>Define your service flows using simple Blueprint nodes or C++ functions. Focus on what needs to be done, not how the robot does it.</p>
-                </div>
-                <div class="getting-started-card">
-                    <i class="fas fa-play"></i>
-                    <h3>3. Run and Monitor</h3>
-                    <p>Start your service robot and watch it execute tasks. Use built-in visualization tools to monitor performance and debug issues.</p>
-                </div>
-            </div>
-        </section>
+    <section>
+      <h2>Overview</h2>
+      <ul>
+        <li>Fast food is a $1.1 trillion industry with 13 million employees.</li>
+        <li>$17.5 billion yearly cost associated with employee turnover and retraining.</li>
+        <li>VR training reduces training time and eliminates the massive costs of old ineffective systems.</li>
+        <li>Headsets are now at an accessible price point ($299) and getting cheaper.</li>
+      </ul>
+    </section>
 
-        <section id="features" class="section">
-            <h2>Key Features</h2>
-            <ul class="feature-list">
-                <li>
-                    <div class="feature-header">
-                        <h3>Environment Management</h3>
-                        <img src="images/Equipment.png" alt="Robot service environment" class="feature-image">
-                    </div>
-                    <ul>
-                        <li>Dynamic equipment discovery and registration</li>
-                        <li>Property-based interaction zones</li>
-                        <li>Runtime environment adaptation</li>
-                        <li>Multi-equipment coordination</li>
-                    </ul>
-                </li>
-                <li>
-                    <div class="feature-header">
-                        <h3>Task Framework</h3>
-                        <img src="images/PourCoffee.png" alt="Robot serving coffee" class="feature-image">
-                    </div>
-                    <ul>
-                        <li>Business logic focused programming</li>
-                        <li>Natural task sequencing</li>
-                        <li>Priority-based task management</li>
-                        <li>Adaptive task execution</li>
-                    </ul>
-                </li>
-                <li>
-                    <div class="feature-header">
-                        <h3>Developer Experience</h3>
-                        <img src="images/Blueprint.png" alt="Robot waving to customer" class="feature-image">
-                    </div>
-                    <ul>
-                        <li>Visual task programming</li>
-                        <li>Real-time environment visualization</li>
-                        <li>Intuitive debugging tools</li>
-                        <li>Comprehensive documentation</li>
-                    </ul>
-                </li>
-            </ul>
-        </section>
+    <section>
+      <h2>Problem</h2>
+      <ul>
+        <li>Existing training solutions are dangerously bad. We took the online crew member training for Dunkin’ and were not prepared for the job - pictures and text on a website do not work.</li>
+        <li>High turnover rates and ineffective training increase operational costs and reduce workforce efficiency.</li>
+        <li>Restaurant owners are out of touch with the next generation of crew members they need to hire and train.</li>
+      </ul>
+    </section>
 
-        <section id="blueprint-nodes" class="section">
-            <h2>Blueprint Nodes</h2>
-            <div class="node-examples">
-                <div class="node-card">
-                    <h3>Environment Nodes</h3>
-                    <ul>
-                        <li>Register Equipment</li>
-                        <li>Define Interaction Zone</li>
-                        <li>Set Environment Properties</li>
-                        <li>Update Equipment State</li>
-                    </ul>
-                </div>
-                <div class="node-card">
-                    <h3>Task Nodes</h3>
-                    <ul>
-                        <li>Define Service Flow</li>
-                        <li>Set Task Priority</li>
-                        <li>Monitor Task Progress</li>
-                        <li>Handle Task Completion</li>
-                    </ul>
-                </div>
-                <div class="node-card">
-                    <h3>Business Logic Nodes</h3>
-                    <ul>
-                        <li>Process Customer Order</li>
-                        <li>Manage Service Queue</li>
-                        <li>Handle Customer Interaction</li>
-                        <li>Track Service Metrics</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
+    <section>
+      <h2>Solution</h2>
+      <ul>
+        <li>Hands‑on experience in a real virtual store for fun, immersive, risk‑free, interactive learning.</li>
+        <li>A modular Unreal Engine training platform simulating peak store operations and multiple roles.</li>
+        <li>Meets the next generation of gamers in a way they enjoy.</li>
+        <li>“A spoonful of sugar makes the medicine go down.”</li>
+      </ul>
+    </section>
 
-        <section id="cpp-api" class="section">
-            <h2>C++ API</h2>
-            <div class="code-block">
-                <h3>High-Level Robot Control API</h3>
-                <pre><code><span class="preprocessor">#pragma once</span>
+    <section>
+      <h2>Does It Work?</h2>
+      <ul>
+        <li>Yes - companies like <a href="https://www.ossovr.com/" target="_blank" rel="noopener">OssoVR</a> report up to 300% improvements in outcomes for surgical training.</li>
+        <li>Early testers of our Dunkin’ VR training show a remarkable increase in competence.</li>
+        <li>A Dunkin’ franchise owner told us he learned more about a crew members role from our demo than from official corporate materials.</li>
+      </ul>
+    </section>
 
-<span class="preprocessor">#include</span> <span class="string">"CoreMinimal.h"</span>
-<span class="preprocessor">#include</span> <span class="string">"Kismet/BlueprintFunctionLibrary.h"</span>
-<span class="preprocessor">#include</span> <span class="string">"GraspBlueprintFunctionLibrary.generated.h"</span>
+    <section>
+      <h2>What We’ve Built</h2>
+      <ul>
+        <li>Prototype for Dunkin’: beverage preparation in a virtual store.
+          <ul>
+            <li>Small hot coffee (10 steps)</li>
+            <li>Medium espresso (15 steps)</li>
+            <li>Signature latte (20 steps)</li>
+          </ul>
+        </li>
+      </ul>
+      <p class="note">Early validation: franchise owners found our demo more informative than official corporate training.</p>
+    </section>
 
-<span class="keyword">UENUM</span>(<span class="type">BlueprintType</span>)
-<span class="keyword">enum class</span> <span class="type">EGraspHand</span> : <span class="type">uint8</span>
-{
-    Left,
-    Right
-};
+    <section>
+      <h2>Strategy & Roadmap</h2>
+      <ul>
+        <li>Approach Inspire with a v1 offer that’s impossible to refuse by developing at little to no cost with MegaGrant support.</li>
+        <li>“We can do anything but we can’t do everything.” Focus on one brand, get it right, and avoid poisoning the broader opportunity.</li>
+        <li>Learn the hard problems with one brand before scaling to larger chains like McDonald’s, Starbucks, Chick‑fil‑A, and Taco Bell (which represent the majority of the market).</li>
+        <li>Release an XR SDK/template so Unreal developers can help fulfill exploding demand for QSR training.</li>
+      </ul>
+    </section>
 
-<span class="keyword">UENUM</span>(<span class="type">BlueprintType</span>)
-<span class="keyword">enum class</span> <span class="type">EGraspStyle</span> : <span class="type">uint8</span>
-{
-    Pinch,
-    FullGrip,
-    Custom
-};
+    <section>
+      <h2>Team Expertise & Partnerships</h2>
+      <ul>
+        <li>George: 11+ years of Unreal Engine experience; led development on multiple multiplayer games, and built the demo.</li>
+        <li>Lee: 15 years in the games industry across product development, marketing, and operations.</li>
+        <li>Alex: Programmer and animator at 2K Games with 12+ years in game animation.</li>
+        <li>David: 15‑year environment artist; created the demo’s visuals; ships content on fab.com.</li>
+        <li>Aaron: Advisor and part‑owner of 10 Dunkin’ locations; strategic partner and customer.</li>
+      </ul>
+    </section>
 
-<span class="keyword">UENUM</span>(<span class="type">BlueprintType</span>)
-<span class="keyword">enum class</span> <span class="type">EGraspInteractionType</span> : <span class="type">uint8</span>
-{
-    None,
-    Pull,
-    Push,
-    Rotate,
-    Press,
-    Custom
-};
+    <section>
+      <h2>V1 Scope & Plan</h2>
+      <p>We will pitch Inspire Brands on funding a v1 pilot to run in a few Dunkin’ stores. The goal is a 15‑minute experience that recreates peak‑hour operations so trainees build real muscle memory.</p>
+      <p>Imagine an employee wears a GoPro for a full 8‑hour shift; we select the 15 busiest minutes and reproduce the same interactions in VR.</p>
+      <ul class="scope-list">
+        <li><strong>Beverage</strong>
+          <ul>
+            <li>Completed: Coffee (easy), Cappuccino (medium), Signature Caramel Latte (hard).</li>
+            <li>Remaining 20 beverages:
+              <ul>
+                <li>Espresso & Coffee: Iced Coffee, Cold Brew, Americano, Iced Americano, Latte, Iced Latte, Macchiato, Iced Macchiato, Espresso</li>
+                <li>Teas: Tea, Iced Tea, Hot Chocolate, Matcha Latte, Iced Matcha Latte, Chai Latte, Iced Chai Latte</li>
+                <li>Frozen: Frozen Coffee, Coolatta, Frozen Chocolate, Frozen Matcha Latte</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><strong>Sandwich Station</strong>
+          <ul>
+            <li>Art complete; implement guided assembly gameplay for:
+              <ul>
+                <li>Sausage, Egg & Cheese; Bacon, Egg & Cheese; Turkey Sausage, Egg & Cheese; Egg & Cheese</li>
+                <li>Sourdough Breakfast Sandwich; Wake‑up Wrap; Hash Browns; Snackin’ Bacon</li>
+                <li>Stuffed Bagel Minis; Bagels with Cream Cheese; Muffins; Croissant; English Muffin</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><strong>Drive‑Thru</strong>
+          <ul>
+            <li>Implement remaining POS menus (bakery, sandwiches, retail, local, functions) and develop customer interactions that challenge the player across menus.</li>
+          </ul>
+        </li>
+        <li><strong>Donut Prep</strong>
+          <ul>
+            <li>Artwork exists; implement instruction for batter creation, cutting rings, frying, glazing/sprinkling.</li>
+          </ul>
+        </li>
+        <li><strong>Expediter</strong>
+          <ul>
+            <li>Compare order contents to receipts; low art needs but heavy gameplay to cover common mistakes.</li>
+          </ul>
+        </li>
+      </ul>
+      <p class="note">Estimate: ~3 months per module; ~12 months total for dev + QA with two full‑time team members (1 programmer, 1 artist).</p>
+    </section>
 
-<span class="keyword">UCLASS</span>(<span class="type">Blueprintable</span>)
-<span class="keyword">class</span> <span class="type">GRASP_API</span> <span class="type">UGraspBlueprintLibrary</span> : <span class="keyword">public</span> <span class="type">UBlueprintFunctionLibrary</span>
-{
-    <span class="keyword">GENERATED_BODY</span>()
+    <section>
+      <h2>Why Epic</h2>
+      <ul>
+        <li>Creates a new category for Unreal: enterprise training at QSR scale.</li>
+        <li>Establishes Unreal as the credible alternative to Unity in enterprise XR training for QSR deployments.</li>
+        <li>Delivers a flagship, measurable case study with Inspire’s 33,000+ restaurants, creating a reference standard and PR flywheel for Unreal in enterprise.</li>
+      </ul>
+    </section>
 
-<span class="keyword">public</span>:
+    <section>
+        <h2>Funding Request</h2>
+        <p>We are approaching Inspire Brands with a $100,000 proposal to complete development of the initial training modules and prepare a measurable pilot. It would be great if we could tell them Epic is willing to cover a portion of this amount via a MegaGrant.</p>
+        <p class="note">Any support is greatly appreciated and will help signal confidence to Inspire and accelerate the pilot.</p>
+      </section>
 
-    <span class="keyword">UFUNCTION</span>(<span class="type">BlueprintCallable</span>, <span class="type">BlueprintNativeEvent</span>, <span class="type">Category</span> = <span class="string">"Grasp|Actions"</span>)
-    <span class="type">bool</span> <span class="function">MoveRobotTo</span>(
-        <span class="type">AActor</span>* RobotActor,
-        <span class="keyword">const</span> <span class="type">FVector</span>&amp; Destination,
-        <span class="keyword">const</span> <span class="type">FRotator</span>&amp; Orientation,
-        <span class="type">float</span> Speed = <span class="number">1.0f</span>
-    );
+    <section>
+      <h2>Giving Back</h2>
+      <ul>
+        <li>Open XR SDK/template enabling Unreal developers worldwide to build QSR training modules.</li>
+        <li>Creates new work opportunities and broadens Unreal’s footprint in enterprise training.</li>
+      </ul>
+    </section>
 
-    <span class="keyword">UFUNCTION</span>(<span class="type">BlueprintCallable</span>, <span class="type">BlueprintNativeEvent</span>, <span class="type">Category</span> = <span class="string">"Grasp|Actions"</span>)
-    <span class="type">bool</span> <span class="function">MoveHandTo</span>(
-        <span class="type">AActor</span>* RobotActor,
-        <span class="type">EGraspHand</span> Hand,
-        <span class="keyword">const</span> <span class="type">FVector</span>&amp; Destination,
-        <span class="keyword">const</span> <span class="type">FRotator</span>&amp; Orientation,
-        <span class="type">float</span> Speed = <span class="number">1.0f</span>
-    );
+    <section>
+      <h2>Contact</h2>
+      <ul>
+        <li>Email: <a href="mailto:george.rivara@drivenarts.com">george.rivara@drivenarts.com</a></li>
+        <li>Phone: <a href="tel:+15164590101">516-459-0101</a></li>
+        <li><a href="Grasp.mp4" target="_blank" rel="noopener">Demo video</a></li>
+        <li><a href="mailto:contact@drivenarts.com?subject=Epic%20Megagrants%20Headset%20Request&body=we%20would%20like%20to%20request%20a%20headset%20for%20review%20please%20send%20to%20this%20address%20%3Cinsert%20address%3E">Request Build</a></li>
+      </ul>
+    </section>
 
-    <span class="keyword">UFUNCTION</span>(<span class="type">BlueprintCallable</span>, <span class="type">BlueprintNativeEvent</span>, <span class="type">Category</span> = <span class="string">"Grasp|Actions"</span>)
-    <span class="type">bool</span> <span class="function">PickUpObject</span>(
-        <span class="type">AActor</span>* RobotActor,
-        <span class="type">EGraspHand</span> Hand,
-        <span class="type">AActor</span>* TargetObject,
-        <span class="type">EGraspStyle</span> GripStyle
-    );
-
-    <span class="keyword">UFUNCTION</span>(<span class="type">BlueprintCallable</span>, <span class="type">BlueprintNativeEvent</span>, <span class="type">Category</span> = <span class="string">"Grasp|Actions"</span>)
-    <span class="type">bool</span> <span class="function">PlaceObject</span>(
-        <span class="type">AActor</span>* RobotActor,
-        <span class="type">EGraspHand</span> Hand,
-        <span class="type">AActor</span>* TargetObject,
-        <span class="keyword">const</span> <span class="type">FVector</span>&amp; Location
-    );
-
-    <span class="keyword">UFUNCTION</span>(<span class="type">BlueprintCallable</span>, <span class="type">BlueprintNativeEvent</span>, <span class="type">Category</span> = <span class="string">"Grasp|Actions"</span>)
-    <span class="type">bool</span> <span class="function">UseObject</span>(
-        <span class="type">AActor</span>* RobotActor,
-        <span class="type">EGraspHand</span> Hand,
-        <span class="type">AActor</span>* TargetObject,
-        <span class="type">EGraspInteractionType</span> Interaction
-    );
-};</code></pre>
-            </div>
-            <div class="code-explanation">
-                <h3>Key Concepts</h3>
-                <ul>
-                    <li><strong>Blueprint Integration:</strong> All core functionality is exposed to Blueprints for visual programming.</li>
-                    <li><strong>Intuitive Controls:</strong> Simple, high-level functions for common robot actions like movement, grasping, and object interaction.</li>
-                    <li><strong>Flexible Interaction:</strong> Support for different grip styles and interaction types to handle various scenarios.</li>
-                    <li><strong>Hand-Specific Control:</strong> Independent control of left and right robot hands for complex manipulation tasks.</li>
-                </ul>
-            </div>
-        </section>
-
-        <section id="examples" class="section">
-            <h2>Examples</h2>
-            <div class="example-grid">
-                <div class="example-card">
-                    <h3>Environment Setup</h3>
-                    <p>Define your restaurant layout, equipment properties, and interaction zones. Let the robot discover and adapt to its environment.</p>
-                    <a href="#" class="button">View Example</a>
-                </div>
-                <div class="example-card">
-                    <h3>Customer Service Flow</h3>
-                    <p>Create natural customer interaction patterns, order processing, and service delivery logic without worrying about robot mechanics.</p>
-                    <a href="#" class="button">View Example</a>
-                </div>
-                <div class="example-card">
-                    <h3>Dynamic Task Management</h3>
-                    <p>Define business rules, priorities, and workflows while the SDK handles the complexities of robot execution.</p>
-                    <a href="#" class="button">View Example</a>
-                </div>
-            </div>
-        </section>
-
-        <section id="roadmap" class="section">
-            <h2>Roadmap</h2>
-            <div class="roadmap-timeline">
-                <div class="timeline-item">
-                    <h3>Phase 1</h3>
-                    <ul>
-                        <li>Core SDK Foundation</li>
-                        <ul>
-                            <li>Environment property system</li>
-                            <li>Basic task abstraction layer</li>
-                            <li>Initial robot manufacturer integration</li>
-                        </ul>
-                        <li>Developer Experience</li>
-                        <ul>
-                            <li>Unreal Engine plugin architecture</li>
-                            <li>Blueprint node system</li>
-                            <li>Basic documentation and examples</li>
-                        </ul>
-                        <li>Project Milestones</li>
-                        <ul>
-                            <li>Epic Mega Grant funding</li>
-                            <li>Initial SDK prototype</li>
-                        </ul>
-                    </ul>
-                </div>
-                <div class="timeline-item">
-                    <h3>Phase 2</h3>
-                    <ul>
-                        <li>Advanced Features</li>
-                        <ul>
-                            <li>Equipment interaction framework</li>
-                            <li>Task-to-motion translation system</li>
-                            <li>Multi-robot coordination</li>
-                            <li>Dynamic environment adaptation</li>
-                        </ul>
-                        <li>Developer Tools</li>
-                        <ul>
-                            <li>Visual task editor in Unreal</li>
-                            <li>Real-time robot state visualization</li>
-                            <li>Task simulation and validation</li>
-                        </ul>
-                        <li>Industry Partnerships</li>
-                        <ul>
-                            <li>Additional robot manufacturer support</li>
-                            <li>Industry-specific task libraries</li>
-                            <li>Enterprise deployment tools</li>
-                        </ul>
-                    </ul>
-                </div>
-                <div class="timeline-item">
-                    <h3>Phase 3</h3>
-                    <ul>
-                        <li>Ecosystem Growth</li>
-                        <ul>
-                            <li>Community-driven development</li>
-                            <li>Open source contributions</li>
-                            <li>Developer marketplace</li>
-                        </ul>
-                        <li>Industry Standards</li>
-                        <ul>
-                            <li>Task definition standards</li>
-                            <li>Robot interface protocols</li>
-                        </ul>
-                    </ul>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <script src="https://kit.fontawesome.com/your-font-awesome-kit.js"></script>
-    <script src="js/grasp-script.js"></script>
+    
+  </main>
 </body>
-</html> 
+</html>
+

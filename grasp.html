@@ -33,12 +33,17 @@
     .btn.primary:hover { filter: brightness(0.95); }
     hr { margin: 28px 0; border: 0; border-top: 1px solid #eaedf2; }
     h2 { margin: 36px 0 8px; font-size: 22px; letter-spacing: -0.01em; }
+    h3 { margin: 20px 0 6px; font-size: 18px; letter-spacing: -0.01em; font-weight: 700; color: #111827; }
+    h4 { margin: 16px 0 6px; font-size: 16px; letter-spacing: -0.01em; font-weight: 700; color: #111827; }
     p { margin: 10px 0; }
     ul { margin: 10px 0 0; padding-left: 18px; }
     .note { color: #6b7280; font-size: 14px; }
     footer { margin-top: 48px; color: #6b7280; font-size: 14px; }
     .hero-shot { display: block; width: 100%; height: auto; margin-top: 16px; border-radius: 12px; border: 1px solid #e6e8ee; box-shadow: 0 6px 18px rgba(16,24,40,.08); }
     .scope-list > li { margin-bottom: 14px; }
+    .milestone { margin: 18px 0 24px; }
+    .milestone-body { margin-left: 20px; padding-left: 14px; border-left: 2px solid #eaedf2; }
+    .milestone-body ul ul { margin-top: 2px; }
   </style>
 </head>
 <body>
@@ -71,13 +76,14 @@
     <section>
       <h2>Elevator Pitch</h2>
       <p>GRASP is an Unreal Engine VR training app that lets new Dunkin' hires master peak-hour operations in 15 minutes.</p>
+      <p class="note"><strong>Why now:</strong> This is a $17.5B annual problem we can attack with a $299 headset and modest development <a href="#fn2">[2]</a>.</p>
     </section>
 
     <section>
       <h2>Overview</h2>
       <ul>
         <li>Fast food is a $1.1 trillion industry with 13 million employees <a href="#fn1">[1]</a>.</li>
-        <li>$17.5 billion yearly cost associated with employee turnover and retraining <a href="#fn2">[2]</a>.</li>
+        <li>$17.5 billion yearly cost associated with high employee turnover and retraining <a href="#fn2">[2]</a>.</li>
         <li>VR training reduces training time and cuts costs across industries <a href="#fn3">[3]</a> <a href="#fn4">[4]</a> <a href="#fn5">[5]</a> <a href="#fn6">[6]</a> <a href="#fn7">[7]</a>.</li>
         <li>Headsets are now at an accessible price point ($299) and getting cheaper.</li>
       </ul>
@@ -114,7 +120,7 @@
     <section>
       <h2>What We’ve Built</h2>
       <ul>
-        <li>Prototype for Dunkin’: beverage preparation in a virtual store.
+        <li>Prototype of training in a virtual Dunkin' store.
           <ul>
             <li>Small hot coffee (10 steps)</li>
             <li>Medium cappuccino (15 steps)</li>
@@ -128,70 +134,101 @@
     <section>
       <h2>Strategy & Roadmap</h2>
       <ul>
-        <li>Approach Inspire with a v1 offer that’s impossible to refuse by developing at little to no cost with MegaGrant support.</li>
-        <li>“We can do anything but we can’t do everything.” Focus on one brand, get it right, and avoid poisoning the broader opportunity.</li>
-        <li>Learn the hard problems with one brand before scaling to larger chains like McDonald’s, Starbucks, Chick‑fil‑A, and Taco Bell (which represent the majority of the market).</li>
-        <li>Release an XR SDK/template so Unreal developers can help fulfill exploding demand for QSR training.</li>
+        <li>We are approaching Inspire Brands (owners of Dunkin’) with a $100,000 pilot proposal.</li>
+        <li>With Epic’s support, we can deliver a V1 pilot that is impossible to refuse.</li>
+        <li>Each milestone is tied to clear deliverables and funding sources.</li>
       </ul>
+
+      <div class="milestone">
+        <h4>Milestone 1 (Epic MegaGrant – $25,000, 6 months)</h4>
+        <div class="milestone-body">
+          <p><strong>Objective:</strong> Deliver a polished 3‑module pilot (Beverage + Sandwich Station + Drive‑Thru) to Inspire Brands.</p>
+          <p><strong>Total:</strong> $25,000 | 500 hrs @ $50/hr</p>
+          <ul>
+            <li><strong>A) Beverage Station — completion</strong> – $6,000 (120 hrs)
+              <ul>
+                <li><strong>Completed:</strong> Coffee (easy), Cappuccino (medium), Signature Caramel Latte (hard).</li>
+                <li><strong>Remaining 20 beverages:</strong>
+                  <ul>
+                    <li><strong>Espresso &amp; Coffee:</strong> Iced Coffee, Cold Brew, Americano, Iced Americano, Latte, Iced Latte, Macchiato, Iced Macchiato, Espresso</li>
+                    <li><strong>Teas:</strong> Tea, Iced Tea, Hot Chocolate, Matcha Latte, Iced Matcha Latte, Chai Latte, Iced Chai Latte</li>
+                    <li><strong>Frozen:</strong> Frozen Coffee, Coolatta, Frozen Chocolate, Frozen Matcha Latte</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><strong>B) Sandwich Station</strong> – $9,000 (180 hrs)
+              <ul>
+                <li><strong>Art complete; implement guided assembly gameplay for:</strong>
+                  <ul>
+                    <li>Sausage, Egg &amp; Cheese; Bacon, Egg &amp; Cheese; Turkey Sausage, Egg &amp; Cheese; Egg &amp; Cheese</li>
+                    <li>Sourdough Breakfast Sandwich; Wake‑up Wrap; Hash Browns; Snackin’ Bacon</li>
+                    <li>Stuffed Bagel Minis; Bagels with Cream Cheese; Muffins; Croissant; English Muffin</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><strong>C) Drive‑Thru</strong> – $10,000 (200 hrs)
+              <ul>
+                <li><strong>Implement remaining POS menus</strong> (bakery, sandwiches, retail, local, functions) and develop customer interactions that challenge the player across menus.</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="milestone">
+        <h4>Milestone 2 (Inspire Brands Pilot – $100,000, ~12 months)</h4>
+        <div class="milestone-body">
+          <ul>
+        <li>A funded pilot across approximately 10 Dunkin’ stores.</li>
+        <li>Complete the Donut Prep module (batter, cutting, frying, glazing/decorating).</li>
+        <li>Implement the Expediter role (order review, accuracy/error detection).</li>
+        <li>Deliver a full V1 training experience simulating 15 minutes of peak operations.</li>
+        <li>Deploy and evaluate in ~10 Dunkin’ pilot locations; capture performance data and trainee outcomes.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="milestone">
+        <h4>Milestone 3 (Dunkin’ Rollout – $2–3M, 18–24 months)</h4>
+        <div class="milestone-body">
+          <ul>
+        <li>If/when the pilot succeeds, Inspire Brands could fund a full rollout across Dunkin’s ~9,500 locations.</li>
+        <li>National deployment for Dunkin’.</li>
+        <li>Enterprise hardening: device fleet management, analytics dashboards, compliance reporting.</li>
+        <li>Train thousands of new employees annually with Unreal‑based VR modules.</li>
+        <li>Establish Unreal Engine as the enterprise training backbone for Dunkin’.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="milestone">
+        <h4>Milestone 4 (Multi‑brand Expansion & SDK – $10M+, multi‑year)</h4>
+        <div class="milestone-body">
+          <ul>
+        <li>After Dunkin’ success, Inspire will extend training to all brands (Arby’s, Sonic, Jimmy John’s, Baskin‑Robbins, Buffalo Wild Wings).</li>
+        <li>Rollout across 33,000+ Inspire restaurants worldwide.</li>
+        <li>Release/extend the open XR SDK/template for third‑party Unreal developers.</li>
+        <li>Ongoing content updates, SDK maintenance, and developer success programs.</li>
+        <li>Cement Unreal as the industry standard for QSR enterprise XR training.</li>
+          </ul>
+        </div>
+      </div>
     </section>
 
     <section>
       <h2>Team Expertise & Partnerships</h2>
       <ul>
-        <li>George: 11+ years of Unreal Engine experience; led development on multiple multiplayer games, and built the demo.</li>
-        <li>Lee: 15 years in the games industry across product development, marketing, and operations.</li>
+        <li>George: 11 years of Unreal Engine experience; led development on multiple multiplayer games, and built the demo.</li>
+        <li>David: 15‑year environment artist; created the demo’s visuals; ships great content on fab.com.</li>
         <li>Alex: Programmer and animator at 2K Games with 12+ years in game animation.</li>
-        <li>David: 15‑year environment artist; created the demo’s visuals; ships content on fab.com.</li>
+        <li>Lee: 15 years in the games industry across product development, marketing, and operations.</li>
         <li>Aaron: Advisor and part‑owner of 10 Dunkin’ locations; strategic partner and customer.</li>
       </ul>
     </section>
 
-    <section>
-      <h2>V1 Scope & Plan</h2>
-      <p>We will pitch Inspire Brands on funding a v1 pilot to run in a few Dunkin’ stores. The goal is a 15‑minute experience that recreates peak‑hour operations so trainees build real muscle memory.</p>
-      <p>Imagine an employee wears a GoPro for a full 8‑hour shift; we select the 15 busiest minutes and reproduce the same interactions in VR.</p>
-      <ul class="scope-list">
-        <li><strong>Beverage</strong>
-          <ul>
-            <li>Completed: Coffee (easy), Cappuccino (medium), Signature Caramel Latte (hard).</li>
-            <li>Remaining 20 beverages:
-              <ul>
-                <li>Espresso & Coffee: Iced Coffee, Cold Brew, Americano, Iced Americano, Latte, Iced Latte, Macchiato, Iced Macchiato, Espresso</li>
-                <li>Teas: Tea, Iced Tea, Hot Chocolate, Matcha Latte, Iced Matcha Latte, Chai Latte, Iced Chai Latte</li>
-                <li>Frozen: Frozen Coffee, Coolatta, Frozen Chocolate, Frozen Matcha Latte</li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-        <li><strong>Sandwich Station</strong>
-          <ul>
-            <li>Art complete; implement guided assembly gameplay for:
-              <ul>
-                <li>Sausage, Egg & Cheese; Bacon, Egg & Cheese; Turkey Sausage, Egg & Cheese; Egg & Cheese</li>
-                <li>Sourdough Breakfast Sandwich; Wake‑up Wrap; Hash Browns; Snackin’ Bacon</li>
-                <li>Stuffed Bagel Minis; Bagels with Cream Cheese; Muffins; Croissant; English Muffin</li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-        <li><strong>Drive‑Thru</strong>
-          <ul>
-            <li>Implement remaining POS menus (bakery, sandwiches, retail, local, functions) and develop customer interactions that challenge the player across menus.</li>
-          </ul>
-        </li>
-        <li><strong>Donut Prep</strong>
-          <ul>
-            <li>Artwork exists; implement instruction for batter creation, cutting rings, frying, glazing/sprinkling.</li>
-          </ul>
-        </li>
-        <li><strong>Expediter</strong>
-          <ul>
-            <li>Compare order contents to receipts; low art needs but heavy gameplay to cover common mistakes.</li>
-          </ul>
-        </li>
-      </ul>
-      <p class="note">Estimate: ~3 months per module; ~12 months total for dev + QA with two full‑time team members (1 programmer, 1 artist).</p>
-    </section>
+    
 
     <section>
       <h2>Why Epic</h2>
@@ -202,17 +239,23 @@
       </ul>
     </section>
 
-    <section>
-        <h2>Funding Request</h2>
-        <p>We are approaching Inspire Brands with a $100,000 proposal to complete development of the initial training modules and prepare a measurable pilot. It would be great if we could tell them Epic is willing to cover a portion of this amount via a MegaGrant.</p>
-        <p class="note">Any support is greatly appreciated and will help signal confidence to Inspire and accelerate the pilot.</p>
-      </section>
+    
 
     <section>
       <h2>Giving Back</h2>
       <ul>
         <li>Open XR SDK/template enabling Unreal developers worldwide to build QSR training modules.</li>
         <li>Creates new work opportunities and broadens Unreal’s footprint in enterprise training.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Contact</h2>
+      <ul>
+        <li>Email: <a href="mailto:george.rivara@drivenarts.com">george.rivara@drivenarts.com</a></li>
+        <li>Phone: <a href="tel:+15169624354">516-962-4354</a></li>
+        <li><a href="https://www.dropbox.com/scl/fi/1yjxr2el8yy61ofcklef1/Grasp.mp4?rlkey=eoe4dkicu199uokxsheqq69bx&st=zxbj3wzc&raw=1" target="_blank" rel="noopener">Demo video</a></li>
+        <li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=contact@drivenarts.com&su=Epic%20Megagrants%20Headset%20Request&body=Hello%20Driven%20Arts%20Team,%0A%0AWe%20would%20like%20to%20request%20a%20review%20headset%20for%20the%20GRASP%20pilot.%0A%0AShipping%20information:%0A-%20Recipient%20name:%0A-%20Company:%0A-%20Street%20address:%0A-%20City,%20State,%20ZIP:%0A-%20Country:%0A-%20Phone%20number:%0A-%20Email:%0A%0ANotes%20(optional):%0A%0AWe%20understand%20you%20will%20ship%20a%20Meta%20Quest%203%20for%20evaluation.%0A%0AThank%20you.%0A%0ABest%20regards,%0A%3CYour%20name%3E%0A%3CYour%20title%3E%0A%3CYour%20organization%3E" target="_blank" rel="noopener">Request Build</a></li>
       </ul>
     </section>
 
@@ -229,17 +272,6 @@
         <li id="fn8">OssoVR surgical outcomes improvement: <a href="https://omtecexpo.com/videos/a-new-reality-for-surgical-performance/" target="_blank" rel="noopener">OMTEC Expo</a>.</li>
       </ol>
     </section>
-
-    <section>
-      <h2>Contact</h2>
-      <ul>
-        <li>Email: <a href="mailto:george.rivara@drivenarts.com">george.rivara@drivenarts.com</a></li>
-        <li>Phone: <a href="tel:+15169624354">516-962-4354</a></li>
-        <li><a href="https://www.dropbox.com/scl/fi/1yjxr2el8yy61ofcklef1/Grasp.mp4?rlkey=eoe4dkicu199uokxsheqq69bx&st=zxbj3wzc&raw=1" target="_blank" rel="noopener">Demo video</a></li>
-        <li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=contact@drivenarts.com&su=Epic%20Megagrants%20Headset%20Request&body=Hello%20Driven%20Arts%20Team,%0A%0AWe%20would%20like%20to%20request%20a%20review%20headset%20for%20the%20GRASP%20pilot.%0A%0AShipping%20information:%0A-%20Recipient%20name:%0A-%20Company:%0A-%20Street%20address:%0A-%20City,%20State,%20ZIP:%0A-%20Country:%0A-%20Phone%20number:%0A-%20Email:%0A%0ANotes%20(optional):%0A%0AWe%20understand%20you%20will%20ship%20a%20Meta%20Quest%203%20for%20evaluation.%0A%0AThank%20you.%0A%0ABest%20regards,%0A%3CYour%20name%3E%0A%3CYour%20title%3E%0A%3CYour%20organization%3E" target="_blank" rel="noopener">Request Build</a></li>
-      </ul>
-    </section>
-
     
   </main>
 </body>

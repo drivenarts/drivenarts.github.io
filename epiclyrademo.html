@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex, nofollow">
+
+    <title>Epiclyra Demo (Driven Arts)</title>
+
+    <!-- The following CSS style rules are critical for proper behavior (copied from sample) -->
+    <style>
+        /*
+          When the stream is fullscreen, we must position an invisible overlay <div>
+          with some whitespace content above the video and make it invisible to mouse
+          events. If we don't place this overlay, the mouse cursor will automatically
+          hide because the browser thinks the user is watching a full-screen video.
+        */
+        #streamFullscreenContainer:not(:fullscreen) > #streamFullscreenOverlay {
+            display: none;
+        }
+        #streamFullscreenContainer:fullscreen > #streamFullscreenOverlay {
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 100;
+            pointer-events: none;
+        }
+
+        /* Scale video up to match container in fullscreen mode */
+        #streamFullscreenContainer:fullscreen > #streamVideoElement {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Prevent Safari from drawing media controls over stream */
+        #streamVideoElement::-webkit-media-controls {
+            display: none !important;
+        }
+    </style>
+
+    <!-- PlayFab JS SDK (browser) -->
+    <script type="text/javascript" src="https://download.playfab.com/PlayFabClientApi.js"></script>
+
+    <!-- GameLift Streams SDK -->
+    <script type="text/javascript" src="gameliftstreams-1.1.0.js"></script>
+
+    <!-- Optional helper functionality that converts touch events to mouse events -->
+    <script type="text/javascript" src="touchtomouse.js"></script>
+
+    <!-- Uninteresting utility helpers for setting/getting cookies, query params, etc -->
+    <script type="text/javascript" src="utils.js"></script>
+
+    <!-- Sample animation to be played while the service is connecting -->
+    <script type="text/javascript" src="loadingscreen.js"></script>
+
+    <!-- Visual styles -->
+    <link rel="stylesheet" href="pretty.css">
+</head>
+
+<body onload="appInit()">
+
+    <!-- panel -->
+    <div id="appLoading" style="display: none">
+        <h1>Epiclyra Demo - Logging in...</h1>
+        <p id="loginStatus"></p>
+    </div>
+
+    <!-- panel -->
+    <div id="appSetup" style="display: none">
+        <h1>Epiclyra Demo - Ready</h1>
+        <p><b>PlayFab Title:</b> <span id="pfTitleId"></span></p>
+        <p><b>CustomId:</b> <span id="pfCustomId"></span></p>
+        <p><b>PlayFabId:</b> <span id="pfPlayFabId"></span></p>
+
+        <div id="setupClickToStart"><button onclick="appStartStreaming()">Click To Start</button></div>
+        <div id="setupValidationError"></div>
+    </div>
+
+    <!-- panel -->
+    <div id="appReconnect" style="display: none">
+        <h1>Epiclyra Demo - Session Interrupted</h1>
+        <p>Token found in URL. You can attempt a fast reconnect.</p>
+        <div id="reconnectClickToReconnect"><button onclick="appReconnectStreaming()">Reconnect</button></div>
+        <p>or</p>
+        <p><a href="#" onclick="deleteAllQueryParams(); window.location.reload(); return false">Click to restart</a></p>
+    </div>
+
+    <!-- panel -->
+    <div id="appConnecting" style="display: none">
+        <h1>Connecting...</h1>
+        <canvas id="loadingScreenCanvas"></canvas>
+        <p id="connectStatus"></p>
+    </div>
+
+    <!-- panel -->
+    <div id="appStreaming" style="display: none">
+        <h1>Stream Connected</h1>
+        <div id="streamControls">
+            <button id="streamingToggleInput" onclick="appToggleInput()">Attach Input</button>
+            <button id="streamingGoFullscreen" onclick="appGoFullscreen()">Go Fullscreen</button>
+            <button id="streamingTerminate" onclick="appTerminateStream()">Terminate</button>
+        </div>
+
+        <div id="streamFullscreenContainer">
+            <div id="streamFullscreenOverlay">&nbsp;<!-- important for :fullscreen CSS --></div>
+            <video id="streamVideoElement" autoplay playsinline disablepictureinpicture></video>
+            <audio id="streamAudioElement" autoplay></audio>
+        </div>
+    </div>
+
+    <!-- panel -->
+    <div id="appDisconnected" style="display: none">
+        <h1>Stream Disconnected</h1>
+        <p><a href="#" onclick="window.location.reload(); return false">Click to reload</a></p>
+        <p><a href="#" onclick="deleteAllQueryParams(); window.location.reload(); return false">Click to restart</a></p>
+    </div>
+
+    <!-- panel -->
+    <div id="appError" style="display: none">
+        <h1>Stream Error</h1>
+        <p id="errorText"></p>
+        <p><a href="#" onclick="deleteAllQueryParams(); window.location.reload(); return false">Click to restart</a></p>
+    </div>
+
+    <script type="text/javascript">
+        // =========================
+        // Config
+        // =========================
+        const PLAYFAB_TITLE_ID = "1BB19A";
+        const CUSTOM_ID_STORAGE_KEY = "exobellum_playfab_custom_id";
+        const POLL_DELAY_MS = 1000;
+        const PLAYFAB_EXECUTE_CLOUDSCRIPT_URL = `https://${PLAYFAB_TITLE_ID}.playfabapi.com/Client/ExecuteCloudScript`;
+        let myStreamPhase = "idle"; // idle | connecting | connected | disconnected
+
+        // =========================
+        // PlayFab helpers
+        // =========================
+        function ensurePlayFabLoaded() {
+            if (!window.PlayFabClientSDK || !window.PlayFab) {
+                throw new Error("PlayFab JS SDK not loaded. Check the <script src=\"https://download.playfab.com/PlayFabClientApi.js\"> tag.");
+            }
+            PlayFab.settings.titleId = PLAYFAB_TITLE_ID;
+        }
+
+        function getOrCreateCustomId() {
+            let id = localStorage.getItem(CUSTOM_ID_STORAGE_KEY);
+            if (!id) {
+                id = "web_" + Math.random().toString(36).slice(2) + "_" + Date.now().toString(36);
+                localStorage.setItem(CUSTOM_ID_STORAGE_KEY, id);
+            }
+            return id;
+        }
+
+        function playFabLoginWithCustomId() {
+            return new Promise((resolve, reject) => {
+                const customId = getOrCreateCustomId();
+                PlayFabClientSDK.LoginWithCustomID({
+                    TitleId: PLAYFAB_TITLE_ID,
+                    CustomId: customId,
+                    CreateAccount: true,
+                }, (result, error) => {
+                    if (error) return reject(error);
+                    // Cache for keepalive termination calls (pagehide/unload/disconnect)
+                    try {
+                        window.myPlayFabSessionTicket = result?.data?.SessionTicket || "";
+                        window.myPlayFabId = result?.data?.PlayFabId || "";
+                    } catch (e) { /* ignore */ }
+                    // Some SDK variants require manually setting the session ticket:
+                    try {
+                        if (result?.data?.SessionTicket && PlayFabClientSDK.SetSessionTicket) {
+                            PlayFabClientSDK.SetSessionTicket(result.data.SessionTicket);
+                        }
+                    } catch (e) { /* ignore */ }
+                    resolve(result);
+                });
+            });
+        }
+
+        function executeCloudScript(functionName, functionParameter) {
+            return new Promise((resolve, reject) => {
+                PlayFabClientSDK.ExecuteCloudScript({
+                    FunctionName: functionName,
+                    FunctionParameter: functionParameter || {},
+                    GeneratePlayStreamEvent: true,
+                }, (result, error) => {
+                    if (error) return reject(error);
+                    if (result?.data?.Error) return reject(result.data.Error);
+                    resolve(result.data.FunctionResult);
+                });
+            });
+        }
+
+        // Best-effort CloudScript call for page unload / disconnect situations.
+        // Uses fetch keepalive and the PlayFab session ticket directly.
+        function executeCloudScriptKeepalive(functionName, functionParameter) {
+            const ticket = window.myPlayFabSessionTicket;
+            if (!ticket) {
+                console.warn("No PlayFab SessionTicket cached; cannot send keepalive ExecuteCloudScript");
+                return;
+            }
+            const payload = {
+                FunctionName: functionName,
+                FunctionParameter: functionParameter || {},
+                GeneratePlayStreamEvent: true,
+            };
+            try {
+                // keepalive allows the browser to attempt sending during page close.
+                fetch(PLAYFAB_EXECUTE_CLOUDSCRIPT_URL, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-Authorization": ticket,
+                    },
+                    body: JSON.stringify(payload),
+                    keepalive: true,
+                    // mode defaults to cors; PlayFab supports CORS
+                }).catch(() => {});
+            } catch (e) {
+                // ignore
+            }
+        }
+
+        function appTerminateStreamBestEffort(reason) {
+            if (window.myTerminating) return;
+            const token = getQueryParams().get("token");
+            if (!token) return;
+            window.myTerminating = true;
+            console.log("Best-effort terminate stream", { reason, token });
+            executeCloudScriptKeepalive("TerminateStream", { Token: token, Reason: reason || "" });
+        }
+
+        // =========================
+        // GameLift Streams client
+        // =========================
+        function streamConnectionStateCallback(state) {
+            console.log("Connection state:", state);
+            myStreamPhase = state;
+            if (state === "disconnected") {
+                // If we don't explicitly terminate, the session can sit in PENDING_CLIENT_RECONNECTION
+                // until ConnectionTimeoutSeconds elapses (shows as Reconnection timeout in AWS).
+                appTerminateStreamBestEffort("webrtc_disconnected");
+                appDisconnect();
+            }
+        }
+
+        function streamChannelErrorCallback(error) {
+            console.log("WebRTC internal connection error:", error);
+            appTerminateStreamBestEffort("webrtc_channel_error");
+            appDisconnect();
+        }
+
+        function streamServerDisconnectCallback(reasoncode) {
+            console.log("Server disconnected:", reasoncode);
+            // If server terminated, discard reconnect token
+            if (reasoncode === "terminated") {
+                deleteAllQueryParams();
+            } else {
+                appTerminateStreamBestEffort("server_disconnect_" + reasoncode);
+            }
+            appDisconnect();
+        }
+
+        function streamApplicationMessageCallback(message) {
+            console.log("Received " + message.length + " bytes of message from Application");
+        }
+
+        function appInitGameLiftStreams() {
+            if (window.myGameLiftStreams) return;
+
+            gameliftstreams.setLogLevel("debug"); // defaults to 'none'
+
+            window.myGameLiftStreams = new gameliftstreams.GameLiftStreams({
+                videoElement: document.getElementById("streamVideoElement"),
+                audioElement: document.getElementById("streamAudioElement"),
+                inputConfiguration: {
+                    autoMouse: true,
+                    autoKeyboard: true,
+                    autoGamepad: true,
+                    hapticFeedback: true,
+                    setCursor: "visibility",
+                    autoPointerLock: "fullscreen",
+                },
+                clientConnection: {
+                    connectionState: streamConnectionStateCallback,
+                    channelError: streamChannelErrorCallback,
+                    serverDisconnect: streamServerDisconnectCallback,
+                    applicationMessage: streamApplicationMessageCallback,
+                }
+            });
+
+            // Touchscreen support
+            RegisterTouchToMouse(document.getElementById("streamVideoElement"));
+        }
+
+        // =========================
+        // UI helpers
+        // =========================
+        function appShowPanel(id) {
+            for (const iter of document.querySelectorAll("body > div")) {
+                iter.style.display = (iter.id === id) ? "block" : "none";
+            }
+        }
+
+        function appSetError(msg, err) {
+            console.error(msg, err);
+            document.getElementById("errorText").textContent = msg + (err ? (": " + JSON.stringify(err)) : "");
+            appShowPanel("appError");
+        }
+
+        // =========================
+        // App flow
+        // =========================
+        async function appInit() {
+            try {
+                appShowPanel("appLoading");
+                document.getElementById("pfTitleId").textContent = PLAYFAB_TITLE_ID;
+
+                ensurePlayFabLoaded();
+                appInitGameLiftStreams();
+
+                const loginResult = await playFabLoginWithCustomId();
+                const customId = getOrCreateCustomId();
+                const playFabId = loginResult?.data?.PlayFabId || "(unknown)";
+                document.getElementById("pfTitleId").textContent = PLAYFAB_TITLE_ID;
+                document.getElementById("pfCustomId").textContent = customId;
+                document.getElementById("pfPlayFabId").textContent = playFabId;
+                document.getElementById("loginStatus").textContent = "Logged in.";
+
+                if (getQueryParams().get("token")) {
+                    appShowPanel("appReconnect");
+                } else {
+                    appShowPanel("appSetup");
+                }
+
+                // If the user closes the tab or navigates away, try to terminate to avoid reconnection timeouts.
+                window.addEventListener("pagehide", () => appTerminateStreamBestEffort("pagehide"));
+                // visibilitychange is very aggressive (can trigger when switching tabs / devtools).
+                // Only terminate on hidden if we were actually connected.
+                document.addEventListener("visibilitychange", () => {
+                    if (document.visibilityState === "hidden" && myStreamPhase === "connected") {
+                        appTerminateStreamBestEffort("visibility_hidden_connected");
+                    }
+                });
+            } catch (e) {
+                appSetError("Initialization failed", e);
+            }
+        }
+
+        async function appStartStreaming() {
+            try {
+                myStreamPhase = "connecting";
+                // Safari/WebKit autoplay workaround (copied from sample):
+                if (navigator.userAgent.indexOf(" AppleWebKit/") !== -1 &&
+                        navigator.userAgent.indexOf(" Gecko/") === -1 &&
+                        navigator.userAgent.indexOf(" Chrome/") === -1) {
+                    window.myPreStreamAudioElement = document.createElement("audio");
+                    window.myPreStreamAudioElement.loop = true;
+                    window.myPreStreamAudioElement.src = "silence.mp3";
+                    void window.myPreStreamAudioElement.play();
+                }
+
+                appShowPanel("appConnecting");
+                document.getElementById("connectStatus").textContent = "Generating WebRTC offer...";
+                LoadingScreenStart();
+
+                const signalRequest = await window.myGameLiftStreams.generateSignalRequest();
+
+                document.getElementById("connectStatus").textContent = "Calling PlayFab CloudScript StartStream...";
+                const startResult = await executeCloudScript("StartStream", {
+                    SignalRequest: signalRequest,
+                    AdditionalLaunchArgs: ["-d3d11"],
+                });
+
+                if (!startResult || !startResult.Token) {
+                    throw new Error("StartStream returned no Token");
+                }
+
+                // Persist token in URL for reconnect
+                setQueryParams(new Map([["token", startResult.Token]]));
+
+                // Poll for signal response
+                document.getElementById("connectStatus").textContent = "Waiting for stream to become ACTIVE...";
+                let signalResponse = "";
+                while (!signalResponse) {
+                    await new Promise((resolve) => setTimeout(resolve, POLL_DELAY_MS));
+                    const pollResult = await executeCloudScript("GetSignalResponse", { Token: startResult.Token });
+                    signalResponse = pollResult?.SignalResponse || "";
+                }
+
+                document.getElementById("connectStatus").textContent = "Completing WebRTC connection...";
+                await window.myGameLiftStreams.processSignalResponse(signalResponse);
+
+                LoadingScreenStop();
+                myStreamPhase = "connected";
+                appShowPanel("appStreaming");
+            } catch (e) {
+                LoadingScreenStop();
+                try { window.myGameLiftStreams.close(); } catch (e2) { /* ignore */ }
+                myStreamPhase = "disconnected";
+                appSetError("Start streaming failed", e);
+            } finally {
+                // Clean up the temporary looping audio element, if we created one.
+                if (window.myPreStreamAudioElement) {
+                    window.myPreStreamAudioElement.pause();
+                    window.myPreStreamAudioElement.remove();
+                    delete window.myPreStreamAudioElement;
+                }
+            }
+        }
+
+        async function appReconnectStreaming() {
+            const token = getQueryParams().get("token");
+            try {
+                if (!token) throw new Error("No token in URL");
+
+                myStreamPhase = "connecting";
+                appShowPanel("appConnecting");
+                document.getElementById("connectStatus").textContent = "Generating WebRTC offer...";
+                LoadingScreenStart();
+
+                const signalRequest = await window.myGameLiftStreams.generateSignalRequest();
+
+                document.getElementById("connectStatus").textContent = "Calling PlayFab CloudScript ReconnectStream...";
+                const resp = await executeCloudScript("ReconnectStream", { Token: token, SignalRequest: signalRequest });
+                const signalResponse = resp?.SignalResponse || "";
+                if (!signalResponse) throw new Error("ReconnectStream returned empty SignalResponse");
+
+                document.getElementById("connectStatus").textContent = "Completing WebRTC reconnection...";
+                await window.myGameLiftStreams.processSignalResponse(signalResponse);
+
+                LoadingScreenStop();
+                myStreamPhase = "connected";
+                appShowPanel("appStreaming");
+            } catch (e) {
+                LoadingScreenStop();
+                try { window.myGameLiftStreams.close(); } catch (e2) { /* ignore */ }
+                myStreamPhase = "disconnected";
+                appSetError("Reconnect failed", e);
+            }
+        }
+
+        function appShowReconnectLinks(show) {
+            // not used; kept for parity with sample if you expand UI later
+        }
+
+        function appToggleInput() {
+            window.myInputEnabled = !window.myInputEnabled;
+            if (window.myInputEnabled) {
+                console.log("Attached Input");
+                window.myGameLiftStreams.attachInput();
+                document.getElementById("streamingToggleInput").textContent = "Detach Input";
+            } else {
+                window.myGameLiftStreams.detachInput();
+                document.getElementById("streamingToggleInput").textContent = "Attach Input";
+            }
+        }
+
+        function appGoFullscreen() {
+            if (!window.myInputEnabled) {
+                appToggleInput();
+            }
+            document.getElementById("streamFullscreenContainer").requestFullscreen();
+        }
+
+        async function appTerminateStream() {
+            const token = getQueryParams().get("token");
+            if (!token) {
+                appDisconnect();
+                return;
+            }
+
+            try {
+                // Await so the request actually completes (otherwise it may be cancelled).
+                await executeCloudScript("TerminateStream", { Token: token, Reason: "user_clicked_terminate" });
+
+                // Only discard the token after we successfully told the backend to terminate.
+                deleteAllQueryParams();
+                appDisconnect();
+            } catch (e) {
+                // Do NOT discard the token on failure; otherwise the stream can sit in
+                // PENDING_CLIENT_RECONNECTION until timeout with no way to retry termination.
+                console.error("TerminateStream failed", e);
+
+                // Try a best-effort keepalive termination as a fallback.
+                appTerminateStreamBestEffort("terminate_button_fallback");
+
+                appSetError("Terminate failed (token kept in URL; you can retry by reloading and using Reconnect, then Terminate again)", e);
+            }
+        }
+
+        function appDisconnect() {
+            try { window.myGameLiftStreams.close(); } catch (e) { /* ignore */ }
+            myStreamPhase = "disconnected";
+            appShowPanel("appDisconnected");
+        }
+    </script>
+</body>
+</html>

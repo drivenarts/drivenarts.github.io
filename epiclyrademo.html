@@ -8,16 +8,104 @@
 
     <!-- The following CSS style rules are critical for proper behavior (copied from sample) -->
     <style>
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+            margin: 0;
+            background: #000;
+        }
+
+        body {
+            color: white;
+        }
+
+        #appRoot {
+            min-height: 100vh;
+        }
+
+        #appSetup {
+            position: relative;
+            min-height: 100vh;
+            background: #000;
+        }
+
+        #setupStartOverlay {
+            position: absolute;
+            inset: 0;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            border: 0;
+            background: rgba(0, 0, 0, 0.92);
+            color: white;
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            font-weight: bold;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        #appRoot:fullscreen {
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+        }
+
+        #appRoot:fullscreen #appConnecting,
+        #appRoot:fullscreen #appStreaming {
+            padding: 0;
+            height: 100%;
+            background: #000;
+        }
+
+        #appRoot:fullscreen #appConnecting h1,
+        #appRoot:fullscreen #appConnecting #connectStatus,
+        #appRoot:fullscreen #appStreaming h1,
+        #appRoot:fullscreen #appStreaming #streamControls {
+            display: none;
+        }
+
+        #streamFullscreenContainer {
+            position: relative;
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            background: #000;
+        }
+
+        #streamActivateOverlay {
+            position: absolute;
+            inset: 0;
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            border: 0;
+            background: rgba(0, 0, 0, 0.45);
+            color: white;
+            font-size: clamp(1.25rem, 2vw, 2rem);
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        #appRoot:fullscreen #streamActivateOverlay {
+            display: none;
+        }
+
         /*
           When the stream is fullscreen, we must position an invisible overlay <div>
           with some whitespace content above the video and make it invisible to mouse
           events. If we don't place this overlay, the mouse cursor will automatically
           hide because the browser thinks the user is watching a full-screen video.
         */
-        #streamFullscreenContainer:not(:fullscreen) > #streamFullscreenOverlay {
+        #appRoot:not(:fullscreen) #streamFullscreenOverlay {
             display: none;
         }
-        #streamFullscreenContainer:fullscreen > #streamFullscreenOverlay {
+        #appRoot:fullscreen #streamFullscreenOverlay {
             position: absolute;
             left: 0;
             top: 0;
@@ -28,9 +116,32 @@
         }
 
         /* Scale video up to match container in fullscreen mode */
-        #streamFullscreenContainer:fullscreen > #streamVideoElement {
+        #appRoot:fullscreen #streamFullscreenContainer {
+            height: 100%;
+            min-height: 100%;
+        }
+
+        #appRoot:fullscreen #loadingScreenCanvas {
+            display: block;
             width: 100%;
             height: 100%;
+            margin: 0 auto;
+        }
+
+        #appRoot:fullscreen > div[hidden],
+        #appRoot > div[hidden] {
+            display: none !important;
+        }
+
+        #appRoot:fullscreen #streamVideoElement {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        #streamVideoElement {
+            display: block;
+            max-width: 100%;
         }
 
         /* Prevent Safari from drawing media controls over stream */
@@ -59,6 +170,7 @@
 </head>
 
 <body onload="appInit()">
+    <div id="appRoot">
 
     <!-- panel -->
     <div id="appLoading" style="display: none">
@@ -68,12 +180,7 @@
 
     <!-- panel -->
     <div id="appSetup" style="display: none">
-        <h1>Epiclyra Demo - Ready</h1>
-        <p><b>PlayFab Title:</b> <span id="pfTitleId"></span></p>
-        <p><b>CustomId:</b> <span id="pfCustomId"></span></p>
-        <p><b>PlayFabId:</b> <span id="pfPlayFabId"></span></p>
-
-        <div id="setupClickToStart"><button onclick="appStartStreaming()">Click To Start</button></div>
+        <button id="setupStartOverlay" type="button" onclick="appStartStreamingWithFullscreen()">Click To Start</button>
         <div id="setupValidationError"></div>
     </div>
 
@@ -97,12 +204,11 @@
     <div id="appStreaming" style="display: none">
         <h1>Stream Connected</h1>
         <div id="streamControls">
-            <button id="streamingToggleInput" onclick="appToggleInput()">Attach Input</button>
-            <button id="streamingGoFullscreen" onclick="appGoFullscreen()">Go Fullscreen</button>
             <button id="streamingTerminate" onclick="appTerminateStream()">Terminate</button>
         </div>
 
         <div id="streamFullscreenContainer">
+            <button id="streamActivateOverlay" type="button" onclick="appActivateStream()">Click to Activate</button>
             <div id="streamFullscreenOverlay">&nbsp;<!-- important for :fullscreen CSS --></div>
             <video id="streamVideoElement" autoplay playsinline disablepictureinpicture></video>
             <audio id="streamAudioElement" autoplay></audio>
@@ -122,6 +228,7 @@
         <p id="errorText"></p>
         <p><a href="#" onclick="deleteAllQueryParams(); window.location.reload(); return false">Click to restart</a></p>
     </div>
+    </div>
 
     <script type="text/javascript">
         // =========================
@@ -132,6 +239,7 @@
         const POLL_DELAY_MS = 1000;
         const PLAYFAB_EXECUTE_CLOUDSCRIPT_URL = `https://${PLAYFAB_TITLE_ID}.playfabapi.com/Client/ExecuteCloudScript`;
         let myStreamPhase = "idle"; // idle | connecting | connected | disconnected
+        let myInputEnabled = false;
 
         // =========================
         // PlayFab helpers
@@ -296,8 +404,31 @@
         // =========================
         // UI helpers
         // =========================
+        function appGetRootElement() {
+            return document.getElementById("appRoot");
+        }
+
+        function appIsFullscreen() {
+            return document.fullscreenElement === appGetRootElement();
+        }
+
+        async function appRequestFullscreen() {
+            if (appIsFullscreen()) {
+                return true;
+            }
+
+            try {
+                await appGetRootElement().requestFullscreen();
+                return true;
+            } catch (e) {
+                console.warn("Entering fullscreen failed", e);
+                return false;
+            }
+        }
+
         function appShowPanel(id) {
-            for (const iter of document.querySelectorAll("body > div")) {
+            for (const iter of document.querySelectorAll("#appRoot > div")) {
+                iter.hidden = (iter.id !== id);
                 iter.style.display = (iter.id === id) ? "block" : "none";
             }
         }
@@ -308,23 +439,55 @@
             appShowPanel("appError");
         }
 
+        function appSetInputEnabled(enabled) {
+            if (myInputEnabled === enabled) {
+                return;
+            }
+
+            if (window.myGameLiftStreams) {
+                try {
+                    if (enabled) {
+                        console.log("Attached Input");
+                        window.myGameLiftStreams.attachInput();
+                    } else {
+                        console.log("Detached Input");
+                        window.myGameLiftStreams.detachInput();
+                    }
+                } catch (e) {
+                    if (enabled) {
+                        console.warn("Attach input failed", e);
+                        return;
+                    }
+                }
+            }
+
+            myInputEnabled = enabled;
+        }
+
+        function appShowStreamingPanel() {
+            myInputEnabled = false;
+            appShowPanel("appStreaming");
+        }
+
+        function appHandleFullscreenChange() {
+            if (!appIsFullscreen()) {
+                appSetInputEnabled(false);
+            } else if (myStreamPhase === "connected") {
+                appSetInputEnabled(true);
+            }
+        }
+
         // =========================
         // App flow
         // =========================
         async function appInit() {
             try {
                 appShowPanel("appLoading");
-                document.getElementById("pfTitleId").textContent = PLAYFAB_TITLE_ID;
 
                 ensurePlayFabLoaded();
                 appInitGameLiftStreams();
 
-                const loginResult = await playFabLoginWithCustomId();
-                const customId = getOrCreateCustomId();
-                const playFabId = loginResult?.data?.PlayFabId || "(unknown)";
-                document.getElementById("pfTitleId").textContent = PLAYFAB_TITLE_ID;
-                document.getElementById("pfCustomId").textContent = customId;
-                document.getElementById("pfPlayFabId").textContent = playFabId;
+                await playFabLoginWithCustomId();
                 document.getElementById("loginStatus").textContent = "Logged in.";
 
                 if (getQueryParams().get("token")) {
@@ -342,9 +505,15 @@
                         appTerminateStreamBestEffort("visibility_hidden_connected");
                     }
                 });
+                document.addEventListener("fullscreenchange", appHandleFullscreenChange);
             } catch (e) {
                 appSetError("Initialization failed", e);
             }
+        }
+
+        async function appStartStreamingWithFullscreen() {
+            await appRequestFullscreen();
+            await appStartStreaming();
         }
 
         async function appStartStreaming() {
@@ -393,10 +562,14 @@
 
                 LoadingScreenStop();
                 myStreamPhase = "connected";
-                appShowPanel("appStreaming");
+                appShowStreamingPanel();
+                if (appIsFullscreen()) {
+                    appSetInputEnabled(true);
+                }
             } catch (e) {
                 LoadingScreenStop();
                 try { window.myGameLiftStreams.close(); } catch (e2) { /* ignore */ }
+                myInputEnabled = false;
                 myStreamPhase = "disconnected";
                 appSetError("Start streaming failed", e);
             } finally {
@@ -431,10 +604,14 @@
 
                 LoadingScreenStop();
                 myStreamPhase = "connected";
-                appShowPanel("appStreaming");
+                appShowStreamingPanel();
+                if (appIsFullscreen()) {
+                    appSetInputEnabled(true);
+                }
             } catch (e) {
                 LoadingScreenStop();
                 try { window.myGameLiftStreams.close(); } catch (e2) { /* ignore */ }
+                myInputEnabled = false;
                 myStreamPhase = "disconnected";
                 appSetError("Reconnect failed", e);
             }
@@ -444,23 +621,11 @@
             // not used; kept for parity with sample if you expand UI later
         }
 
-        function appToggleInput() {
-            window.myInputEnabled = !window.myInputEnabled;
-            if (window.myInputEnabled) {
-                console.log("Attached Input");
-                window.myGameLiftStreams.attachInput();
-                document.getElementById("streamingToggleInput").textContent = "Detach Input";
-            } else {
-                window.myGameLiftStreams.detachInput();
-                document.getElementById("streamingToggleInput").textContent = "Attach Input";
+        async function appActivateStream() {
+            const enteredFullscreen = await appRequestFullscreen();
+            if (enteredFullscreen || appIsFullscreen()) {
+                appSetInputEnabled(true);
             }
-        }
-
-        function appGoFullscreen() {
-            if (!window.myInputEnabled) {
-                appToggleInput();
-            }
-            document.getElementById("streamFullscreenContainer").requestFullscreen();
         }
 
         async function appTerminateStream() {
@@ -490,7 +655,9 @@
         }
 
         function appDisconnect() {
+            appSetInputEnabled(false);
             try { window.myGameLiftStreams.close(); } catch (e) { /* ignore */ }
+            myInputEnabled = false;
             myStreamPhase = "disconnected";
             appShowPanel("appDisconnected");
         }

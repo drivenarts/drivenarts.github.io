@@ -13,6 +13,7 @@ function LoadingScreenStart() {
 
     loadingFlag = true;
     const canvas = document.getElementById("loadingScreenCanvas");
+    canvas.style.display = "block";
     canvas.style.width = "100%";
     canvas.style.height = "100%";
     canvas.style.aspectRatio = aspectRatio.toString();
@@ -64,4 +65,8 @@ function LoadingScreenAnimation() {
 
 function LoadingScreenStop() {
     loadingFlag = false;
+    const canvas = document.getElementById("loadingScreenCanvas");
+    if (canvas) {
+        canvas.style.display = "none";
+    }
 }

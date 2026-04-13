@@ -270,9 +270,13 @@
         const CUSTOM_ID_STORAGE_KEY = "exobellum_playfab_custom_id";
         const POLL_DELAY_MS = 1000;
         const PLAYFAB_EXECUTE_CLOUDSCRIPT_URL = `https://${PLAYFAB_TITLE_ID}.playfabapi.com/Client/ExecuteCloudScript`;
+        const STREAM_SERVICE_STATUS_FUNCTION_NAME = "GetStreamServiceStatus";
+        const SLACK_NOTIFICATION_FUNCTION_NAME = "SendSlackNotification";
         let myStreamPhase = "idle"; // idle | connecting | connected | disconnected
         let myInputEnabled = false;
         let myMobileUnsupported = false;
+        let myAvailabilitySlackNotificationSent = false;
+        let myFailureSlackNotificationSent = false;
 
         // =========================
         // PlayFab helpers
@@ -332,6 +336,123 @@
             });
         }
 
+        function appShowStreamUnavailable(statusResult) {
+            console.warn("Stream service is marked unavailable", statusResult);
+            const errorPanel = document.getElementById("appError");
+            errorPanel.querySelector("h1").textContent = "Stream Offline";
+            document.getElementById("errorText").textContent = "Please email contact@drivenarts.com to schedule a demo.";
+            appShowPanel("appError");
+        }
+
+        function appBuildStreamOfflineSlackMessage(attemptType, statusResult) {
+            const status = statusResult?.RawValue || statusResult?.NormalizedValue || "DOWN";
+            const reconnectToken = getQueryParams().get("token") ? "true" : "false";
+            return [
+                "stream offline blocked",
+                `attempt=${attemptType || "unknown"}`,
+                `status=${status}`,
+                `reconnectToken=${reconnectToken}`,
+                `path=${window.location.pathname || "/"}`
+            ].join(" | ");
+        }
+
+        function appBuildStreamAvailabilitySlackMessage(attemptType, statusResult) {
+            const isBlocked = statusResult && (statusResult.ShouldBlock === true || statusResult.IsAvailable === false);
+            const status = statusResult?.RawValue || statusResult?.NormalizedValue || (isBlocked ? "DOWN" : "UP");
+            const reconnectToken = getQueryParams().get("token") ? "true" : "false";
+            return [
+                isBlocked ? "stream availability check blocked" : "stream availability check passed",
+                `attempt=${attemptType || "unknown"}`,
+                `status=${status}`,
+                `reconnectToken=${reconnectToken}`,
+                `path=${window.location.pathname || "/"}`
+            ].join(" | ");
+        }
+
+        async function appSendSlackNotification(message) {
+            if (!message) {
+                return;
+            }
+
+            try {
+                await executeCloudScript(SLACK_NOTIFICATION_FUNCTION_NAME, { Message: message });
+            } catch (e) {
+                console.warn("SendSlackNotification failed", e);
+            }
+        }
+
+        function appSerializeSlackDetail(detail) {
+            if (detail === undefined || detail === null) {
+                return "";
+            }
+
+            let text = "";
+            if (typeof detail === "string") {
+                text = detail;
+            } else if (detail instanceof Error) {
+                text = detail.message || String(detail);
+            } else {
+                try {
+                    text = JSON.stringify(detail);
+                } catch (e) {
+                    text = String(detail);
+                }
+            }
+
+            text = text.trim();
+            if (text.length > 400) {
+                text = text.slice(0, 400) + "...";
+            }
+            return text;
+        }
+
+        function appBuildFailureSlackMessage(kind, detail) {
+            const reconnectToken = getQueryParams().get("token") ? "true" : "false";
+            const parts = [
+                "stream failure",
+                `kind=${kind || "unknown"}`,
+                `phase=${myStreamPhase || "unknown"}`,
+                `reconnectToken=${reconnectToken}`,
+                `path=${window.location.pathname || "/"}`
+            ];
+            const detailText = appSerializeSlackDetail(detail);
+            if (detailText) {
+                parts.push(`detail=${detailText}`);
+            }
+            return parts.join(" | ");
+        }
+
+        function appSendFailureSlackNotification(kind, detail) {
+            if (myFailureSlackNotificationSent || window.myTerminating) {
+                return;
+            }
+
+            myFailureSlackNotificationSent = true;
+            appSendSlackNotification(appBuildFailureSlackMessage(kind, detail));
+        }
+
+        async function appEnsureStreamServiceAvailable(options) {
+            try {
+                const statusResult = await executeCloudScript(STREAM_SERVICE_STATUS_FUNCTION_NAME, {});
+                if (options && options.notifySlackOnResult && !myAvailabilitySlackNotificationSent) {
+                    myAvailabilitySlackNotificationSent = true;
+                    appSendSlackNotification(appBuildStreamAvailabilitySlackMessage(options.attemptType, statusResult));
+                }
+                if (statusResult && (statusResult.ShouldBlock === true || statusResult.IsAvailable === false)) {
+                    if (options && options.notifySlackOnBlocked) {
+                        appSendSlackNotification(appBuildStreamOfflineSlackMessage(options.attemptType, statusResult));
+                    }
+                    appShowStreamUnavailable(statusResult);
+                    return false;
+                }
+            } catch (e) {
+                // Only block on an explicit down signal. If the preflight is flaky,
+                // keep the original startup path so available streams still work.
+                console.warn("Stream service availability preflight failed; continuing with normal flow", e);
+            }
+            return true;
+        }
+
         // Best-effort CloudScript call for page unload / disconnect situations.
         // Uses fetch keepalive and the PlayFab session ticket directly.
         function executeCloudScriptKeepalive(functionName, functionParameter) {
@@ -387,12 +508,14 @@
 
         function streamChannelErrorCallback(error) {
             console.log("WebRTC internal connection error:", error);
+            appSendFailureSlackNotification("webrtc_channel_error", error);
             appTerminateStreamBestEffort("webrtc_channel_error");
             appDisconnect();
         }
 
         function streamServerDisconnectCallback(reasoncode) {
             console.log("Server disconnected:", reasoncode);
+            appSendFailureSlackNotification("server_disconnect", reasoncode);
             // If server terminated, discard reconnect token
             if (reasoncode === "terminated") {
                 deleteAllQueryParams();
@@ -548,6 +671,10 @@
                 await playFabLoginWithCustomId();
                 document.getElementById("loginStatus").textContent = "Logged in.";
 
+                if (!await appEnsureStreamServiceAvailable({ notifySlackOnResult: true, attemptType: "init" })) {
+                    return;
+                }
+
                 if (getQueryParams().get("token")) {
                     appShowPanel("appReconnect");
                 } else {
@@ -574,13 +701,23 @@
                 return;
             }
 
+            if (!await appEnsureStreamServiceAvailable({ notifySlackOnBlocked: true, attemptType: "start" })) {
+                return;
+            }
+
             await appRequestFullscreen();
-            await appStartStreaming();
+            await appStartStreaming({ skipServiceAvailabilityCheck: true });
         }
 
-        async function appStartStreaming() {
+        async function appStartStreaming(options) {
             if (appBlockOnMobileUnsupported()) {
                 return;
+            }
+
+            if (!options || !options.skipServiceAvailabilityCheck) {
+                if (!await appEnsureStreamServiceAvailable({ notifySlackOnBlocked: true, attemptType: "start" })) {
+                    return;
+                }
             }
 
             try {
@@ -637,6 +774,7 @@
                 try { window.myGameLiftStreams.close(); } catch (e2) { /* ignore */ }
                 myInputEnabled = false;
                 myStreamPhase = "disconnected";
+                appSendFailureSlackNotification("start_failed", e);
                 appSetError("Start streaming failed", e);
             } finally {
                 // Clean up the temporary looping audio element, if we created one.
@@ -656,6 +794,7 @@
             const token = getQueryParams().get("token");
             try {
                 if (!token) throw new Error("No token in URL");
+                if (!await appEnsureStreamServiceAvailable({ notifySlackOnBlocked: true, attemptType: "reconnect" })) return;
 
                 myStreamPhase = "connecting";
                 appShowPanel("appConnecting");
@@ -683,6 +822,7 @@
                 try { window.myGameLiftStreams.close(); } catch (e2) { /* ignore */ }
                 myInputEnabled = false;
                 myStreamPhase = "disconnected";
+                appSendFailureSlackNotification("reconnect_failed", e);
                 appSetError("Reconnect failed", e);
             }
         }
@@ -715,12 +855,14 @@
 
             try {
                 // Await so the request actually completes (otherwise it may be cancelled).
+                window.myTerminating = true;
                 await executeCloudScript("TerminateStream", { Token: token, Reason: "user_clicked_terminate" });
 
                 // Only discard the token after we successfully told the backend to terminate.
                 deleteAllQueryParams();
                 appDisconnect();
             } catch (e) {
+                window.myTerminating = false;
                 // Do NOT discard the token on failure; otherwise the stream can sit in
                 // PENDING_CLIENT_RECONNECTION until timeout with no way to retry termination.
                 console.error("TerminateStream failed", e);

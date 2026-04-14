@@ -323,25 +323,47 @@
         }
 
         function executeCloudScript(functionName, functionParameter) {
+            const debugParameter = functionParameter || {};
+            console.log("[EpiclyraDemo] ExecuteCloudScript request", {
+                functionName,
+                hasToken: !!debugParameter.Token,
+                hasSignalRequest: !!debugParameter.SignalRequest,
+                attemptType: debugParameter.attemptType || null,
+                parameterKeys: Object.keys(debugParameter),
+            });
             return new Promise((resolve, reject) => {
                 PlayFabClientSDK.ExecuteCloudScript({
                     FunctionName: functionName,
                     FunctionParameter: functionParameter || {},
                     GeneratePlayStreamEvent: true,
                 }, (result, error) => {
-                    if (error) return reject(error);
-                    if (result?.data?.Error) return reject(result.data.Error);
+                    if (error) {
+                        console.error("[EpiclyraDemo] ExecuteCloudScript transport error", { functionName, error });
+                        return reject(error);
+                    }
+                    if (result?.data?.Error) {
+                        console.error("[EpiclyraDemo] ExecuteCloudScript function error", { functionName, error: result.data.Error });
+                        return reject(result.data.Error);
+                    }
+                    console.log("[EpiclyraDemo] ExecuteCloudScript response", {
+                        functionName,
+                        functionResult: result?.data?.FunctionResult,
+                    });
                     resolve(result.data.FunctionResult);
                 });
             });
         }
 
+        function appSetErrorPanel(title, message) {
+            const errorPanel = document.getElementById("appError");
+            errorPanel.querySelector("h1").textContent = title;
+            document.getElementById("errorText").textContent = message;
+            appShowPanel("appError");
+        }
+
         function appShowStreamUnavailable(statusResult) {
             console.warn("Stream service is marked unavailable", statusResult);
-            const errorPanel = document.getElementById("appError");
-            errorPanel.querySelector("h1").textContent = "Stream Offline";
-            document.getElementById("errorText").textContent = "Please email contact@drivenarts.com to schedule a demo.";
-            appShowPanel("appError");
+            appSetErrorPanel("Stream Offline", "Please email contact@drivenarts.com to schedule a demo.");
         }
 
         function appBuildStreamOfflineSlackMessage(attemptType, statusResult) {
@@ -431,9 +453,62 @@
             appSendSlackNotification(appBuildFailureSlackMessage(kind, detail));
         }
 
+        function appIsTerminalStreamSessionStatus(status) {
+            return status === "ERROR" || status === "TERMINATING" || status === "TERMINATED";
+        }
+
+        function appIsCapacityExhaustedResult(result) {
+            return result?.StatusReason === "placementTimeout";
+        }
+
+        function appAbortPendingStreamStartup(title, message, failureKind, detail) {
+            LoadingScreenStop();
+            try { window.myGameLiftStreams.close(); } catch (e) { /* ignore */ }
+            myInputEnabled = false;
+            myStreamPhase = "disconnected";
+            deleteAllQueryParams();
+            if (failureKind) {
+                appSendFailureSlackNotification(failureKind, detail);
+            }
+            appSetErrorPanel(title, message);
+        }
+
+        function appHandlePendingStreamSessionResult(result) {
+            console.log("[EpiclyraDemo] Pending stream session result", result);
+            if (!result) {
+                return false;
+            }
+
+            if (result.NotFound) {
+                throw new Error("Stream session token was not found");
+            }
+
+            if (appIsCapacityExhaustedResult(result)) {
+                appAbortPendingStreamStartup(
+                    "All Demo Streams Are Busy",
+                    "All demo streams are currently busy. Please email contact@drivenarts.com to schedule a demo.",
+                    "streams_busy",
+                    result
+                );
+                return true;
+            }
+
+            if (appIsTerminalStreamSessionStatus(result.Status)) {
+                deleteAllQueryParams();
+                const detailParts = [];
+                if (result.Status) detailParts.push(`status=${result.Status}`);
+                if (result.StatusReason) detailParts.push(`reason=${result.StatusReason}`);
+                throw new Error(`Stream session ended before it became ACTIVE${detailParts.length ? ` (${detailParts.join(", ")})` : ""}`);
+            }
+
+            return false;
+        }
+
         async function appEnsureStreamServiceAvailable(options) {
+            console.log("[EpiclyraDemo] Checking stream service availability", { options });
             try {
                 const statusResult = await executeCloudScript(STREAM_SERVICE_STATUS_FUNCTION_NAME, {});
+                console.log("[EpiclyraDemo] Stream service availability result", statusResult);
                 if (options && options.notifySlackOnResult && !myAvailabilitySlackNotificationSent) {
                     myAvailabilitySlackNotificationSent = true;
                     appSendSlackNotification(appBuildStreamAvailabilitySlackMessage(options.attemptType, statusResult));
@@ -611,8 +686,8 @@
 
         function appSetError(msg, err) {
             console.error(msg, err);
-            document.getElementById("errorText").textContent = msg + (err ? (": " + JSON.stringify(err)) : "");
-            appShowPanel("appError");
+            const detail = appSerializeSlackDetail(err);
+            appSetErrorPanel("Stream Error", msg + (detail ? (": " + detail) : ""));
         }
 
         function appSetInputEnabled(enabled) {
@@ -737,12 +812,17 @@
                 LoadingScreenStart();
 
                 const signalRequest = await window.myGameLiftStreams.generateSignalRequest();
+                console.log("[EpiclyraDemo] Generated signal request", {
+                    length: typeof signalRequest === "string" ? signalRequest.length : null,
+                    type: typeof signalRequest,
+                });
 
                 document.getElementById("connectStatus").textContent = "Calling PlayFab CloudScript StartStream...";
                 const startResult = await executeCloudScript("StartStream", {
                     SignalRequest: signalRequest,
                     AdditionalLaunchArgs: ["-d3d11"],
                 });
+                console.log("[EpiclyraDemo] StartStream result", startResult);
 
                 if (!startResult || !startResult.Token) {
                     throw new Error("StartStream returned no Token");
@@ -751,16 +831,30 @@
                 // Persist token in URL for reconnect
                 setQueryParams(new Map([["token", startResult.Token]]));
 
+                if (appHandlePendingStreamSessionResult(startResult)) {
+                    return;
+                }
+
                 // Poll for signal response
-                document.getElementById("connectStatus").textContent = "Waiting for stream to become ACTIVE...";
-                let signalResponse = "";
-                while (!signalResponse) {
-                    await new Promise((resolve) => setTimeout(resolve, POLL_DELAY_MS));
-                    const pollResult = await executeCloudScript("GetSignalResponse", { Token: startResult.Token });
-                    signalResponse = pollResult?.SignalResponse || "";
+                let signalResponse = startResult?.SignalResponse || "";
+                if (!signalResponse) {
+                    document.getElementById("connectStatus").textContent = "Waiting for stream to become ACTIVE...";
+                    while (!signalResponse) {
+                        await new Promise((resolve) => setTimeout(resolve, POLL_DELAY_MS));
+                        const pollResult = await executeCloudScript("GetSignalResponse", { Token: startResult.Token });
+                        console.log("[EpiclyraDemo] GetSignalResponse poll result", pollResult);
+                        if (appHandlePendingStreamSessionResult(pollResult)) {
+                            return;
+                        }
+                        signalResponse = pollResult?.SignalResponse || "";
+                    }
                 }
 
                 document.getElementById("connectStatus").textContent = "Completing WebRTC connection...";
+                console.log("[EpiclyraDemo] Processing signal response", {
+                    length: typeof signalResponse === "string" ? signalResponse.length : null,
+                    hasSignalResponse: !!signalResponse,
+                });
                 await window.myGameLiftStreams.processSignalResponse(signalResponse);
 
                 LoadingScreenStop();
